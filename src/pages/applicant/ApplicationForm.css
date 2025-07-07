@@ -1,0 +1,262 @@
+/* Import fonts from Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Roboto:wght@400;500;700&display=swap');
+
+/* Basic styles and body background */
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: #f0f2f5; /* A very light grey background */
+  line-height: 1.6;
+  color: #333;
+}
+
+/* --- Container Wrapper (for full page styling) --- */
+.form-container-wrapper {
+  min-height: calc(100vh - 80px); /* Adjust based on your header/footer height */
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; /* Align to top to prevent large vertical gaps */
+  padding: 30px 20px; /* Add padding around the main content */
+  background: linear-gradient(135deg, #e0f7fa 0%, #bbdefb 100%); /* Light blue gradient background */
+}
+
+/* --- Main Content Container (Form Card) --- */
+.application-form-container {
+  max-width: 850px; /* Wider for better form layout */
+  width: 100%;
+  background-color: #ffffff;
+  border-radius: 12px; /* Slightly more rounded corners */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15); /* Softer, larger shadow */
+  padding: 35px 50px; /* More internal padding */
+  animation: fadeIn 0.8s ease-out; /* Fade in animation */
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- Main Form Title --- */
+.form-main-title {
+  font-family: 'Poppins', sans-serif;
+  font-size: 2.2rem; /* Larger, more prominent title */
+  color: #007bff; /* Primary blue color */
+  border-bottom: 3px solid #007bff; /* Thicker, matching border */
+  padding-bottom: 15px;
+  margin-bottom: 35px;
+  text-align: center;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+/* --- Form Section Titles (PART 1, PART 2, etc.) --- */
+.form-section-title {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.6rem; /* Good size for section titles */
+  color: #34495e; /* Darker grey for content headings */
+  margin-top: 30px;
+  margin-bottom: 25px;
+  padding-left: 10px;
+  border-left: 5px solid #2ecc71; /* Green accent border */
+  font-weight: 600;
+}
+
+/* --- Form Group Styling --- */
+.form-group {
+  margin-bottom: 20px; /* Space between form fields */
+}
+
+.form-group label {
+  display: block; /* Make labels take full width */
+  margin-bottom: 8px;
+  font-weight: 500;
+  color: #555;
+  font-size: 1.05rem;
+}
+
+.form-group input[type="text"],
+.form-group input[type="date"],
+.form-group select {
+  width: 100%;
+  padding: 12px 15px; /* More padding for better feel */
+  border: 1px solid #ced4da; /* Light grey border */
+  border-radius: 6px; /* Slightly rounded corners */
+  font-size: 1rem;
+  color: #495057;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  box-sizing: border-box; /* Include padding and border in the element's total width and height */
+}
+
+.form-group input[type="text"]:focus,
+.form-group input[type="date"]:focus,
+.form-group select:focus {
+  border-color: #007bff; /* Blue border on focus */
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25); /* Light blue shadow on focus */
+  outline: none; /* Remove default outline */
+}
+
+/* Custom checkbox styling */
+.form-group-checkbox label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.form-group-checkbox input[type="checkbox"] {
+  display: none; /* Hide default checkbox */
+}
+
+.checkbox-custom {
+  width: 22px;
+  height: 22px;
+  border: 2px solid #007bff;
+  border-radius: 5px;
+  display: inline-block;
+  position: relative;
+  margin-right: 10px;
+  flex-shrink: 0; /* Prevent it from shrinking */
+  transition: all 0.2s ease;
+}
+
+.form-group-checkbox input[type="checkbox"]:checked + .checkbox-custom {
+  background-color: #007bff;
+  border-color: #007bff;
+}
+
+.form-group-checkbox input[type="checkbox"]:checked + .checkbox-custom::after {
+  content: '';
+  position: absolute;
+  top: 3px;
+  left: 7px;
+  width: 6px;
+  height: 12px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  transform: rotate(45deg);
+}
+
+/* --- Submit Button --- */
+.form-submit-container {
+  text-align: center;
+  margin-top: 40px;
+}
+
+.submit-button {
+  background: linear-gradient(45deg, #007bff, #0056b3); /* Blue gradient button */
+  color: white;
+  border: none;
+  border-radius: 8px; /* More rounded button */
+  padding: 15px 35px; /* More padding */
+  font-size: 1.15rem;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 6px 20px rgba(0, 123, 255, 0.4); /* Blue shadow */
+  transition: all 0.3s ease-in-out;
+  letter-spacing: 0.5px;
+}
+
+.submit-button:hover {
+  background: linear-gradient(45deg, #0056b3, #004085); /* Darker blue on hover */
+  transform: translateY(-3px); /* Lift effect */
+  box-shadow: 0 10px 25px rgba(0, 123, 255, 0.5);
+}
+
+.submit-button:active {
+  transform: translateY(0); /* Press effect */
+  box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3);
+}
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 992px) {
+  .application-form-container {
+    padding: 30px 40px;
+  }
+  .form-main-title {
+    font-size: 2rem;
+  }
+  .form-section-title {
+    font-size: 1.5rem;
+  }
+  .form-group label {
+    font-size: 1rem;
+  }
+  .form-group input,
+  .form-group select {
+    padding: 10px 12px;
+    font-size: 0.95rem;
+  }
+  .submit-button {
+    padding: 12px 30px;
+    font-size: 1.05rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .application-form-container {
+    padding: 25px 30px;
+  }
+  .form-main-title {
+    font-size: 1.8rem;
+    margin-bottom: 30px;
+  }
+  .form-section-title {
+    font-size: 1.3rem;
+    margin-top: 25px;
+    margin-bottom: 20px;
+    border-left-width: 4px;
+  }
+  .form-group {
+    margin-bottom: 18px;
+  }
+  .submit-button {
+    font-size: 1rem;
+    padding: 10px 25px;
+  }
+}
+
+@media (max-width: 480px) {
+  .form-container-wrapper {
+    padding: 15px;
+  }
+  .application-form-container {
+    padding: 20px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  }
+  .form-main-title {
+    font-size: 1.5rem;
+    margin-bottom: 25px;
+  }
+  .form-section-title {
+    font-size: 1.15rem;
+    margin-top: 20px;
+    margin-bottom: 15px;
+  }
+  .form-group label {
+    font-size: 0.95rem;
+  }
+  .form-group input,
+  .form-group select {
+    padding: 9px 10px;
+    font-size: 0.9rem;
+  }
+  .submit-button {
+    width: 100%; /* Full width button on very small screens */
+    font-size: 0.95rem;
+    padding: 12px 15px;
+  }
+  .form-group-checkbox label {
+    font-size: 0.95rem;
+  }
+  .checkbox-custom {
+    width: 20px;
+    height: 20px;
+  }
+  .form-group-checkbox input[type="checkbox"]:checked + .checkbox-custom::after {
+    top: 2px;
+    left: 6px;
+    width: 5px;
+    height: 10px;
+  }
+}

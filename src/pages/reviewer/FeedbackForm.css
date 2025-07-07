@@ -1,0 +1,178 @@
+/* General container for the entire feedback page */
+.feedback-container {
+  min-height: 100vh;
+  background: #f0f2f5; /* Light grey background */
+  padding: 40px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: 'Roboto', 'Segoe UI', sans-serif; /* Modern font stack */
+  color: #34495e; /* Dark blue-grey for text */
+}
+
+/* Header section styling */
+.feedback-header {
+  text-align: center;
+  margin-bottom: 30px;
+  padding: 20px 0;
+  border-bottom: 1px solid #e0e0e0;
+  width: 100%;
+  max-width: 700px; /* Max width for content */
+}
+
+.feedback-header h1 {
+  font-size: 36px;
+  color: #2c3e50; /* Darker blue for main title */
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.feedback-header .subtitle {
+  font-size: 18px;
+  color: #555;
+}
+
+.feedback-header .applicant-name {
+  font-weight: 600;
+  color: #007bff; /* Highlight applicant name */
+}
+
+/* Form content styling */
+.feedback-form-content {
+  background: #ffffff; /* White background for the form */
+  padding: 35px;
+  border-radius: 12px; /* Nicely rounded corners */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); /* Soft, deep shadow */
+  width: 100%;
+  max-width: 700px; /* Max width for the form */
+  display: flex;
+  flex-direction: column;
+  gap: 25px; /* Space between form groups */
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  font-size: 18px;
+  color: #4b6584; /* Label color */
+  margin-bottom: 10px;
+  font-weight: 500;
+}
+
+.form-group textarea,
+.form-group select {
+  width: 100%;
+  padding: 12px 15px;
+  border: 1px solid #dcdcdc; /* Light border */
+  border-radius: 8px; /* Rounded inputs */
+  font-size: 16px;
+  color: #333;
+  background-color: #fcfcfc;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  box-sizing: border-box; /* Include padding in width */
+}
+
+.form-group textarea:focus,
+.form-group select:focus {
+  border-color: #007bff; /* Highlight on focus */
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25); /* Soft blue glow on focus */
+  outline: none;
+}
+
+.form-group textarea {
+  resize: vertical; /* Allow vertical resizing */
+  min-height: 120px; /* Minimum height for textarea */
+}
+
+/* Custom styling for select dropdown arrow */
+.form-group select {
+  -webkit-appearance: none; /* Remove default arrow on WebKit browsers */
+  -moz-appearance: none; /* Remove default arrow on Firefox */
+  appearance: none; /* Remove default arrow */
+  background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23007bff%22%20d%3D%22M287%2C114.7L159.2%2C242.5c-3.2%2C3.2-8.3%2C3.2-11.5%2C0L5.4%2C114.7c-3.2-3.2-3.2-8.3%2C0-11.5l11.5-11.5c3.2-3.2%2C8.3-3.2%2C11.5%2C0l113.9%2C113.9l113.9-113.9c3.2-3.2%2C8.3-3.2%2C11.5%2C0l11.5%2C11.5C290.2%2C106.4%2C290.2%2C111.5%2C287%2C114.7z%22%2F%3E%3C%2Fsvg%3E');
+  background-repeat: no-repeat;
+  background-position: right 15px center;
+  background-size: 12px;
+  padding-right: 40px; /* Make space for the custom arrow */
+}
+
+/* Action buttons styling */
+.form-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px; /* Space between buttons */
+  margin-top: 20px;
+}
+
+.form-actions button {
+  padding: 12px 25px;
+  border: none;
+  border-radius: 8px;
+  font-size: 17px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+  flex: 1; /* Make buttons take equal width */
+}
+
+.back-button {
+  background: #6c757d; /* Grey for back button */
+  color: #fff;
+  box-shadow: 0 4px 8px rgba(108, 117, 125, 0.2);
+}
+
+.back-button:hover {
+  background: #5a6268;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(108, 117, 125, 0.3);
+}
+
+.submit-button {
+  background: #28a745; /* Green for submit button */
+  color: #fff;
+  box-shadow: 0 4px 8px rgba(40, 167, 69, 0.2);
+}
+
+.submit-button:hover {
+  background: #218838;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(40, 167, 69, 0.3);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .feedback-container {
+    padding: 20px 15px;
+  }
+
+  .feedback-header h1 {
+    font-size: 30px;
+  }
+
+  .feedback-form-content {
+    padding: 25px;
+    gap: 20px;
+  }
+
+  .form-group label {
+    font-size: 16px;
+  }
+
+  .form-group textarea,
+  .form-group select {
+    padding: 10px 12px;
+    font-size: 15px;
+  }
+
+  .form-actions {
+    flex-direction: column; /* Stack buttons vertically on small screens */
+    gap: 15px;
+  }
+
+  .form-actions button {
+    width: 100%; /* Full width buttons */
+  }
+}

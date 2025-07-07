@@ -1,0 +1,241 @@
+/* General container styles */
+.assigned-container {
+  min-height: 100vh;
+  background: #eef2f6; /* Lighter background for a fresh feel */
+  padding: 30px;
+  font-family: 'Roboto', sans-serif; /* Modern font */
+  color: #34495e; /* Darker text for readability */
+}
+
+/* Header Section */
+.assigned-header {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.assigned-header h1 {
+  font-size: 32px;
+  color: #2c3e50;
+  font-weight: 700;
+  margin: 0;
+}
+
+.current-date span {
+  color: #7f8c8d;
+  font-size: 16px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+/* Applications List */
+.applications-list {
+  display: grid; /* Use grid for better layout control */
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); /* Responsive grid */
+  gap: 25px;
+}
+
+/* Application Card */
+.application-card {
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.08); /* More pronounced shadow */
+  padding: 25px;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.application-card:hover {
+  transform: translateY(-5px); /* Lift effect on hover */
+  box-shadow: 0 10px 20px rgba(0,0,0,0.12);
+}
+
+.card-header {
+  margin-bottom: 15px;
+}
+
+.applicant-name {
+  margin: 0 0 10px;
+  font-size: 24px;
+  color: #2c3e50;
+  font-weight: 600;
+}
+
+.status-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.tag {
+  padding: 6px 12px;
+  border-radius: 20px; /* Pill-shaped tags */
+  font-size: 13px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.department {
+  background: #e0f7fa;
+  color: #00796b;
+}
+
+.status-pending {
+  background: #fff3e0;
+  color: #f57c00;
+}
+
+.status-progress {
+  background: #e3f2fd;
+  color: #1976d2;
+}
+
+.status-completed { /* New status color */
+  background: #e8f5e9;
+  color: #388e3c;
+}
+
+.status-default {
+  background: #eceff1;
+  color: #546e7a;
+}
+
+.deadline {
+  background: #fce4ec;
+  color: #d81b60;
+}
+
+.card-body {
+  flex-grow: 1; /* Allows body to take available space */
+  display: flex;
+  flex-direction: column;
+}
+
+.current-position {
+  font-size: 15px;
+  color: #555;
+  margin-bottom: 15px;
+  font-weight: 500;
+}
+
+.card-body h3 {
+  font-size: 18px;
+  color: #4b6584;
+  margin-bottom: 12px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 8px;
+}
+
+.documents-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.document-tag {
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: background-color 0.2s ease;
+}
+
+.doc-submitted {
+  background: #e8f5e9;
+  color: #2e7d32;
+}
+
+.doc-missing {
+  background: #ffebee;
+  color: #c62828;
+}
+
+.review-button {
+  background: #3f51b5; /* Deeper blue */
+  color: #fff;
+  padding: 12px 20px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  transition: background 0.3s ease, transform 0.2s ease;
+  margin-top: auto; /* Pushes button to the bottom of the card */
+  align-self: flex-start; /* Aligns button to the left within flex container */
+}
+
+.review-button:hover {
+  background: #303f9f;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(63, 81, 181, 0.3);
+}
+
+/* No Applications State */
+.no-applications {
+  text-align: center;
+  background: #ffffff;
+  padding: 50px;
+  border-radius: 12px;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.08);
+  max-width: 600px;
+  margin: 50px auto;
+}
+
+.icon-container {
+  font-size: 60px;
+  margin-bottom: 20px;
+  color: #b0c4de; /* A soft blue-grey */
+}
+
+.no-applications h3 {
+  font-size: 28px;
+  color: #4b6584;
+  margin-bottom: 10px;
+}
+
+.no-applications p {
+  font-size: 16px;
+  color: #7f8c8d;
+  line-height: 1.5;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .assigned-container {
+    padding: 20px;
+  }
+
+  .assigned-header h1 {
+    font-size: 28px;
+  }
+
+  .applications-list {
+    grid-template-columns: 1fr; /* Stack cards on smaller screens */
+  }
+
+  .applicant-name {
+    font-size: 22px;
+  }
+
+  .tag, .document-tag, .current-date span {
+    font-size: 12px;
+  }
+
+  .review-button {
+    width: 100%; /* Full width button on small screens */
+    align-self: stretch;
+  }
+}

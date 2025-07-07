@@ -1,0 +1,269 @@
+/* ApplicationDetails.css */
+
+.application-list-container {
+  padding: 1.5rem;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #1f2937;
+  margin-bottom: 0.5rem;
+}
+
+.subtitle {
+  color: #6b7280;
+}
+
+.application-card {
+  background-color: white;
+  border-radius: 1rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  margin-bottom: 2rem;
+  border: 1px solid #f3f4f6;
+  transition: all 0.3s ease-in-out;
+}
+
+.application-card:hover {
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.08);
+}
+
+.status-header {
+  padding: 0.75rem 1rem;
+  color: white;
+  font-weight: 500;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.bg-emerald-500 {
+  background-color: #10b981;
+}
+.bg-amber-500 {
+  background-color: #f59e0b;
+}
+.bg-rose-500 {
+  background-color: #f43f5e;
+}
+
+.status-percentage {
+  background-color: rgba(255, 255, 255, 0.2);
+  padding: 0.25rem 0.5rem;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+}
+
+.card-body {
+  padding: 1.5rem;
+}
+
+.applicant-info {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 1.5rem;
+}
+
+.avatar {
+  background-color: #e0e7ff;
+  color: #4338ca;
+  font-weight: bold;
+  font-size: 1.125rem;
+  border-radius: 9999px;
+  width: 3rem;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 1rem;
+}
+
+.applicant-name {
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: #1f2937;
+}
+
+.department-name {
+  color: #6b7280;
+}
+
+.details-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.detail-box {
+  background-color: #f9fafb;
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+}
+
+.label {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #6b7280;
+  margin-bottom: 0.25rem;
+}
+
+.value {
+  font-weight: 600;
+}
+
+.highlight {
+  color: #4338ca;
+}
+
+.documents-section, .evaluation-section, .next-steps {
+  margin-bottom: 1.5rem;
+}
+
+.section-title {
+  font-weight: 600;
+  color: #1f2937;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
+}
+
+.documents-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 0.75rem;
+}
+
+.document-item {
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  font-weight: 500;
+}
+
+.valid {
+  background-color: #ecfdf5;
+  color: #047857;
+}
+
+.invalid {
+  background-color: #fee2e2;
+  color: #b91c1c;
+}
+
+.progress-bar {
+  margin-bottom: 1rem;
+}
+
+.progress-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.875rem;
+  margin-bottom: 0.25rem;
+}
+
+.percentage {
+  font-weight: bold;
+}
+
+.bar {
+  width: 100%;
+  background-color: #e5e7eb;
+  height: 0.625rem;
+  border-radius: 9999px;
+}
+
+.fill {
+  height: 100%;
+  border-radius: 9999px;
+}
+
+.criteria-list {
+  margin-top: 1rem;
+}
+
+.criteria-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.5rem;
+  font-size: 0.875rem;
+}
+
+.criteria-item .icon {
+  display: inline-flex;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 9999px;
+  align-items: center;
+  justify-content: center;
+  margin-right: 0.75rem;
+}
+
+.met .icon {
+  background-color: #d1fae5;
+  color: #065f46;
+}
+
+.unmet .icon {
+  background-color: #fee2e2;
+  color: #991b1b;
+}
+
+.note {
+  background-color: #fffbeb;
+  border-left: 4px solid #f59e0b;
+  padding: 1rem;
+  color: #92400e;
+  border-radius: 0.375rem;
+  margin-top: 1rem;
+}
+
+.next-steps ol {
+  padding-left: 1.25rem;
+  list-style-type: decimal;
+  color: #374151;
+}
+
+.action-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.btn-primary {
+  background-image: linear-gradient(to right, #4f46e5, #2563eb);
+  color: white;
+  padding: 0.75rem 1.5rem;
+  font-weight: 500;
+  border-radius: 0.5rem;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  background-image: linear-gradient(to right, #4338ca, #1d4ed8);
+}
+
+.btn-secondary {
+  border: 1px solid #d1d5db;
+  background-color: white;
+  color: #374151;
+  padding: 0.75rem 1.25rem;
+  border-radius: 0.5rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.btn-secondary:hover {
+  background-color: #f9fafb;
+}

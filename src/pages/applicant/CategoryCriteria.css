@@ -1,0 +1,337 @@
+/* Import fonts from Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Roboto:wght@400;500;700&display=swap');
+
+/* Basic styles and body background */
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: #f0f2f5; /* A very light grey background */
+  line-height: 1.6;
+  color: #333;
+}
+
+/* --- Container Wrapper (for full page styling) --- */
+.criteria-container-wrapper {
+  min-height: calc(100vh - 80px); /* Adjust based on your header/footer height */
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; /* Align to top to prevent large vertical gaps */
+  padding: 30px 20px; /* Add padding around the main content */
+  background: linear-gradient(135deg, #e0f7fa 0%, #bbdefb 100%); /* Light blue gradient background */
+}
+
+/* --- Main Content Container (Card) --- */
+.criteria-container {
+  max-width: 1100px; /* Wider for better table display */
+  width: 100%;
+  background-color: #ffffff;
+  border-radius: 12px; /* Slightly more rounded corners */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15); /* Softer, larger shadow */
+  padding: 30px 40px; /* More internal padding */
+  animation: fadeIn 0.8s ease-out; /* Fade in animation */
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- Main Title --- */
+.main-title {
+  font-family: 'Poppins', sans-serif;
+  font-size: 2.2rem; /* Larger, more prominent title */
+  color: #007bff; /* Primary blue color */
+  border-bottom: 3px solid #007bff; /* Thicker, matching border */
+  padding-bottom: 15px;
+  margin-bottom: 30px;
+  text-align: center;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+/* --- Section Titles --- */
+.section-title {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.6rem; /* Good size for section titles */
+  color: #34495e; /* Darker grey for content headings */
+  margin-bottom: 25px;
+  padding-left: 10px;
+  border-left: 5px solid #2ecc71; /* Green accent border */
+  font-weight: 600;
+}
+
+/* --- Categories Section --- */
+.categories-section {
+  margin-bottom: 40px;
+}
+
+.categories-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive grid */
+  gap: 25px; /* Space between cards */
+}
+
+.category-card {
+  background-color: #e3f2fd; /* Light blue background for cards */
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); /* Soft shadow */
+  border: 1px solid #c5e1ff; /* Subtle border */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.category-card:hover {
+  transform: translateY(-5px); /* Lift on hover */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); /* More pronounced shadow */
+}
+
+.category-title {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.3rem;
+  color: #0056b3; /* Darker blue for category titles */
+  border-bottom: 1px dashed #a7d9ff; /* Dashed separator */
+  padding-bottom: 10px;
+  margin-bottom: 15px;
+  font-weight: 600;
+}
+
+.category-list {
+  list-style-type: none; /* Remove default bullets */
+  padding-left: 0;
+  display: grid; /* Use grid for columns within list */
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); /* Two columns for list items */
+  gap: 8px 15px; /* Row and column gap */
+}
+
+.category-list li {
+  font-size: 0.95rem;
+  color: #555;
+  position: relative;
+  padding-left: 20px; /* Space for custom bullet */
+}
+
+.category-list li::before {
+  content: '👉'; /* Custom bullet icon */
+  position: absolute;
+  left: 0;
+  color: #2ecc71; /* Green icon color */
+  font-size: 0.8rem;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* --- Criteria Section (Table) --- */
+.criteria-section {
+  margin-bottom: 40px;
+}
+
+.table-responsive {
+  overflow-x: auto; /* Enable horizontal scrolling on small screens */
+  border-radius: 10px; /* Apply border-radius to the container for overflow */
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08); /* Subtle shadow for the table container */
+}
+
+.criteria-table {
+  width: 100%;
+  border-collapse: separate; /* Use separate to allow border-radius on cells */
+  border-spacing: 0; /* Remove space between cells */
+  background-color: white;
+  min-width: 700px; /* Ensures table doesn't get too narrow on small screens */
+}
+
+.criteria-table th,
+.criteria-table td {
+  padding: 15px;
+  text-align: left;
+  border-bottom: 1px solid #f0f0f0; /* Lighter border for rows */
+}
+
+.criteria-table th {
+  background-color: #007bff; /* Primary blue for header */
+  color: white;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  position: sticky; /* Make header sticky for long tables */
+  top: 0;
+  z-index: 1; /* Ensure it stays above content */
+}
+
+/* Rounded corners for table header */
+.criteria-table thead tr:first-child th:first-child {
+  border-top-left-radius: 10px;
+}
+.criteria-table thead tr:first-child th:last-child {
+  border-top-right-radius: 10px;
+}
+
+.criteria-table tbody tr {
+  transition: background-color 0.2s ease;
+}
+
+.criteria-table tbody tr:nth-child(even) {
+  background-color: #f8f9fa; /* Light grey for even rows */
+}
+
+.criteria-table tbody tr:hover {
+  background-color: #eef7ff; /* Lighter blue on hover */
+}
+
+.criteria-table td {
+  color: #444;
+  font-size: 0.95rem;
+}
+
+.criteria-table td:first-child {
+  font-weight: 500;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.points-column {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  color: #28a745; /* Green for points */
+  font-size: 1.1rem;
+}
+
+/* --- Action Button --- */
+.action-button-container {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.mark-as-read-button {
+  background: linear-gradient(45deg, #2ecc71, #27ae60); /* Green gradient button */
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 15px 30px;
+  font-size: 1.1rem;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 6px 20px rgba(46, 204, 113, 0.4); /* Green shadow */
+  transition: all 0.3s ease-in-out;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.mark-as-read-button:hover {
+  background: linear-gradient(45deg, #27ae60, #229a5a); /* Darker green on hover */
+  transform: translateY(-3px); /* Lift effect */
+  box-shadow: 0 10px 25px rgba(46, 204, 113, 0.5);
+}
+
+.mark-as-read-button:active {
+  transform: translateY(0); /* Press effect */
+  box-shadow: 0 4px 10px rgba(46, 204, 113, 0.3);
+}
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 992px) {
+  .criteria-container {
+    padding: 25px 30px;
+  }
+  .main-title {
+    font-size: 2rem;
+  }
+  .section-title {
+    font-size: 1.5rem;
+  }
+  .category-card {
+    padding: 20px;
+  }
+  .category-title {
+    font-size: 1.2rem;
+  }
+  .category-list {
+    grid-template-columns: 1fr; /* Stack list items on smaller tablets */
+  }
+  .criteria-table th,
+  .criteria-table td {
+    padding: 12px;
+  }
+  .mark-as-read-button {
+    padding: 12px 25px;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .criteria-container {
+    padding: 20px 25px;
+  }
+  .main-title {
+    font-size: 1.8rem;
+    padding-bottom: 10px;
+    margin-bottom: 25px;
+  }
+  .section-title {
+    font-size: 1.3rem;
+    margin-bottom: 20px;
+    border-left-width: 4px;
+  }
+  .categories-grid {
+    grid-template-columns: 1fr; /* Stack categories vertically on mobile */
+  }
+  .category-card {
+    padding: 18px;
+  }
+  .category-title {
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+  }
+  .category-list li {
+    font-size: 0.9rem;
+    padding-left: 18px;
+  }
+  /* Table will scroll horizontally due to min-width */
+  .criteria-table th,
+  .criteria-table td {
+    font-size: 0.9rem;
+  }
+  .points-column {
+    font-size: 1rem;
+  }
+  .mark-as-read-button {
+    font-size: 0.95rem;
+    padding: 10px 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .criteria-container-wrapper {
+    padding: 15px;
+  }
+  .criteria-container {
+    padding: 15px 20px;
+  }
+  .main-title {
+    font-size: 1.6rem;
+  }
+  .section-title {
+    font-size: 1.2rem;
+  }
+  .category-card {
+    padding: 15px;
+  }
+  .category-title {
+    font-size: 1rem;
+  }
+  .category-list li {
+    font-size: 0.85rem;
+  }
+  .criteria-table th,
+  .criteria-table td {
+    padding: 10px;
+  }
+  .mark-as-read-button {
+    width: 100%; /* Full width button on very small screens */
+    font-size: 0.9rem;
+    padding: 12px 15px;
+  }
+}

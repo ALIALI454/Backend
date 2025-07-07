@@ -1,0 +1,120 @@
+/* Import fonts from Google Fonts for a modern look */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Open+Sans:wght@400&display=swap');
+
+/* --- Logo Container --- */
+.logo-container {
+  display: flex;
+  justify-content: center; /* Centering the logo horizontally */
+  align-items: center;
+  padding: 15px 0;
+  background-color: white; /* Hii inafanya background kuwa nyeupe */
+  width: 100%; /* Hii inahakikisha inachukua upana wote unaopatikana */
+  /* min-height: 100px; Hii inaweza kuhitajika kudhibiti urefu */
+
+  /*
+   * MUHIMU: Ikiwa bado kuna rangi tofauti pembeni mwa logo-container,
+   * inamaanisha kuna kipengele cha mzazi (parent element) kinachoizunguka
+   * ambacho kina background-color yake au kina padding/margin inayoacha nafasi.
+   *
+   * Tafadhali kagua faili za CSS zinazofunga (containing) 'Logo' component yako
+   * (mfano: Header.css, Navbar.css, App.css, au main layout component yoyote).
+   * Hakikisha kipengele hicho cha mzazi pia kina 'background-color: white;'
+   * na hakina 'max-width' au 'padding' inayoizuia isisambae kote.
+   */
+  
+  /* Mifano ya staili za kurekebisha kwenye mzazi (USIZIWEKE HAPA, kagua mzazi wako):
+   * body { margin: 0; padding: 0; }
+   * .header-wrapper { background-color: white; width: 100%; margin: 0; padding: 0; }
+   */
+}
+
+/* --- Logo Link (Wrapper for image and title) --- */
+.logo-link {
+  display: flex;
+  flex-direction: column; /* Sasa viko wima: logo juu, jina chini */
+  align-items: center; /* Vifungamanishe katikati kwa urefu (kwa sababu ya flex-direction: column) */
+  text-decoration: none; /* Remove underline from link */
+  color: inherit; /* Inherit text color */
+  transition: transform 0.3s ease-in-out; /* Smooth hover effect */
+}
+
+.logo-link:hover {
+  transform: translateY(-3px); /* Slightly lift on hover */
+}
+
+/* --- Logo Image --- */
+.logo-image {
+  max-width: 80px; /* Ukubwa wa picha ya logo */
+  height: auto;
+  border-radius: 50%; /* Make it perfectly round */
+  margin-bottom: 10px; /* Nafasi kati ya logo na jina chini yake */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Kivuli cha logo */
+  border: 3px solid #007bff; /* Mipaka ya logo */
+  transition: transform 0.4s ease-out; /* Smooth scale on hover */
+}
+
+.logo-link:hover .logo-image {
+  transform: scale(1.05); /* Slightly enlarge image on link hover */
+}
+
+/* --- Logo Title (System Name) --- */
+.logo-title {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700; /* Bold and strong */
+  font-size: 1.4rem; /* Ukubwa wa jina la mfumo */
+  letter-spacing: 0.5px; /* Nafasi kati ya herufi */
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1); /* Kivuli kidogo cha maandishi */
+  text-align: center; /* Hakikisha text iko katikati */
+  line-height: 1.3; /* Kudhibiti nafasi ya mistari */
+
+  /* Kufanya maandishi yawe na gradient ya rangi ya blue */
+  background: linear-gradient(90deg, #007bff, #0056b3);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent; /* Fallback */
+  padding: 0 10px; /* Add some horizontal padding to prevent text touching edges on small screens */
+}
+
+/* --- Responsive Design --- */
+@media (max-width: 992px) {
+  .logo-image {
+    max-width: 75px;
+  }
+  .logo-title {
+    font-size: 1.3rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .logo-container {
+    padding: 10px 0;
+  }
+  .logo-image {
+    max-width: 70px;
+    margin-bottom: 8px;
+  }
+  .logo-title {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .logo-image {
+    max-width: 60px;
+  }
+  .logo-title {
+    font-size: 1rem;
+    letter-spacing: 0.2px;
+  }
+}
+
+@media (max-width: 320px) {
+  .logo-image {
+    max-width: 50px;
+  }
+  .logo-title {
+    font-size: 0.9rem;
+    line-height: 1.2;
+  }
+}

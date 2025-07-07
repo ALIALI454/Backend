@@ -1,0 +1,192 @@
+/* DecisionForm.css */
+
+.decision-container {
+  padding: 1.5rem;
+  max-width: 48rem;
+  margin: 0 auto;
+  background-color: #f9fafb;
+  min-height: 100vh;
+}
+
+.back-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.back-button {
+  margin-right: 1rem;
+  padding: 0.5rem;
+  border-radius: 9999px;
+  background-color: transparent;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+}
+
+.back-button:hover {
+  background-color: #f3f4f6;
+}
+
+.heading-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #1f2937;
+}
+
+.card {
+  background-color: white;
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  border: 1px solid #f3f4f6;
+}
+
+.card-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1f2937;
+  margin-bottom: 1rem;
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+}
+
+.info-box {
+  background-color: #f9fafb;
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+}
+
+.info-label {
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+
+.info-value {
+  font-weight: 500;
+  color: #1f2937;
+  margin-top: 0.25rem;
+}
+
+.radio-group {
+  margin-bottom: 2rem;
+}
+
+.radio-option {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  border: 2px solid #e5e7eb;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-bottom: 0.75rem;
+}
+
+.radio-option:hover {
+  border-color: #a5b4fc;
+}
+
+.radio-option.approve {
+  background-color: #ecfdf5;
+  border-color: #34d399;
+}
+
+.radio-option.reject {
+  background-color: #fef2f2;
+  border-color: #f87171;
+}
+
+.radio-option.request {
+  background-color: #fef9c3;
+  border-color: #facc15;
+}
+
+.radio-input {
+  margin-right: 0.75rem;
+  height: 1.25rem;
+  width: 1.25rem;
+}
+
+.radio-text {
+  display: block;
+  font-weight: 500;
+  color: #1f2937;
+}
+
+.radio-desc {
+  font-size: 0.875rem;
+  color: #6b7280;
+  margin-top: 0.25rem;
+}
+
+.textarea {
+  width: 100%;
+  padding: 1rem;
+  height: 10rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.5rem;
+  resize: vertical;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.textarea:focus {
+  border-color: #6366f1;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
+}
+
+.comment-hint {
+  font-size: 0.875rem;
+  color: #6b7280;
+  margin-top: 0.5rem;
+}
+
+.form-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid #f3f4f6;
+}
+
+.cancel-btn {
+  padding: 0.625rem 1.5rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.5rem;
+  background: white;
+  color: #374151;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.cancel-btn:hover {
+  background-color: #f9fafb;
+}
+
+.submit-btn {
+  padding: 0.625rem 1.5rem;
+  border-radius: 0.5rem;
+  color: white;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.submit-btn.active {
+  background-color: #4f46e5;
+}
+
+.submit-btn.active:hover {
+  background-color: #4338ca;
+}
+
+.submit-btn.disabled {
+  background-color: #9ca3af;
+  cursor: not-allowed;
+}

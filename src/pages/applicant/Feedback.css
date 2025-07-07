@@ -1,0 +1,258 @@
+/* Import fonts from Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Roboto:wght@400;500;700&display=swap');
+
+/* Basic styles and body background */
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: #f0f2f5; /* A very light grey background */
+  line-height: 1.6;
+  color: #333;
+}
+
+/* --- Container Wrapper (for full page styling) --- */
+.feedback-container-wrapper {
+  min-height: calc(100vh - 80px); /* Adjust based on your header/footer height */
+  display: flex;
+  justify-content: center;
+  align-items: center; /* Center the card vertically */
+  padding: 30px 20px;
+  background: linear-gradient(135deg, #e0f7fa 0%, #bbdefb 100%); /* Light blue gradient background */
+}
+
+/* --- Feedback Card (Main Chat Interface) --- */
+.feedback-card {
+  max-width: 700px; /* Wider for chat interface */
+  width: 100%;
+  background-color: #ffffff;
+  border-radius: 15px; /* More rounded corners for a softer look */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15); /* Softer, larger shadow */
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px; /* Space between sections */
+  animation: scaleIn 0.5s ease-out; /* Pop-in animation */
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* --- Feedback Title --- */
+.feedback-title {
+  font-family: 'Poppins', sans-serif;
+  font-size: 2.2rem;
+  color: #007bff;
+  text-align: center;
+  padding-bottom: 15px;
+  border-bottom: 3px solid #007bff;
+  margin-bottom: 20px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+/* --- Messages Area --- */
+.messages-area {
+  flex-grow: 1; /* Allow message area to take available space */
+  max-height: 450px; /* Max height for scrollable message area */
+  overflow-y: auto; /* Enable vertical scrolling */
+  padding: 15px;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  background-color: #fcfcfc; /* Slightly off-white for message background */
+  display: flex;
+  flex-direction: column;
+  gap: 15px; /* Space between messages */
+}
+
+/* Custom scrollbar for webkit browsers */
+.messages-area::-webkit-scrollbar {
+  width: 8px;
+}
+
+.messages-area::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+.messages-area::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+}
+
+.messages-area::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+
+/* --- Message Item (Individual Message Bubble) --- */
+.message-item {
+  max-width: 80%; /* Limit message bubble width */
+  padding: 12px 18px;
+  border-radius: 18px; /* More rounded corners for chat bubbles */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  word-wrap: break-word; /* Ensure long words wrap */
+  transition: all 0.3s ease;
+  animation: slideIn 0.4s ease-out; /* Message slide-in animation */
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.message-sender { /* Styles for messages sent by "Wewe" */
+  align-self: flex-end; /* Align to the right */
+  background-color: #007bff; /* Blue background */
+  color: white;
+  border-bottom-right-radius: 5px; /* Sharpen bottom-right corner for sender */
+}
+
+.message-receiver { /* Styles for messages from "School Promotion Team" */
+  align-self: flex-start; /* Align to the left */
+  background-color: #e9ecef; /* Light grey background */
+  color: #333;
+  border-bottom-left-radius: 5px; /* Sharpen bottom-left corner for receiver */
+}
+
+.message-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.85rem;
+  margin-bottom: 5px;
+  font-weight: 500;
+  opacity: 0.8;
+}
+
+.message-sender .message-header {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.message-receiver .message-header {
+  color: #666;
+}
+
+.message-content {
+  margin: 0;
+  font-size: 1rem;
+}
+
+/* --- Reply Form --- */
+.reply-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px; /* Space between textarea and button */
+  margin-top: 20px; /* Space above form */
+}
+
+.reply-textarea {
+  width: 100%;
+  padding: 12px 15px;
+  border: 1px solid #ced4da;
+  border-radius: 8px;
+  font-size: 1rem;
+  resize: vertical; /* Allow vertical resizing only */
+  min-height: 80px; /* Minimum height */
+  box-sizing: border-box; /* Include padding and border in the element's total width and height */
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.reply-textarea:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+  outline: none;
+}
+
+/* --- Submit Button --- */
+.submit-btn {
+  background: linear-gradient(45deg, #2ecc71, #27ae60); /* Green gradient button */
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 14px 25px;
+  font-size: 1.1rem;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 6px 20px rgba(46, 204, 113, 0.4);
+  transition: all 0.3s ease-in-out;
+  align-self: flex-end; /* Align button to the right */
+  width: fit-content; /* Make button fit its content */
+}
+
+.submit-btn:hover {
+  background: linear-gradient(45deg, #27ae60, #229a5a);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(46, 204, 113, 0.5);
+}
+
+.submit-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 10px rgba(46, 204, 113, 0.3);
+}
+
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 768px) {
+  .feedback-container-wrapper {
+    padding: 20px 15px;
+  }
+  .feedback-card {
+    padding: 20px;
+    gap: 15px;
+  }
+  .feedback-title {
+    font-size: 1.8rem;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+  }
+  .messages-area {
+    max-height: 400px; /* Slightly less height on smaller screens */
+    padding: 10px;
+  }
+  .message-item {
+    padding: 10px 15px;
+    font-size: 0.95rem;
+  }
+  .message-header {
+    font-size: 0.8rem;
+  }
+  .reply-textarea {
+    padding: 10px 12px;
+    font-size: 0.95rem;
+    min-height: 70px;
+  }
+  .submit-btn {
+    padding: 12px 20px;
+    font-size: 1rem;
+    width: 100%; /* Full width button on smaller screens */
+  }
+}
+
+@media (max-width: 480px) {
+  .feedback-container-wrapper {
+    padding: 15px 10px;
+  }
+  .feedback-card {
+    padding: 15px;
+  }
+  .feedback-title {
+    font-size: 1.5rem;
+  }
+  .messages-area {
+    max-height: 350px;
+  }
+  .message-item {
+    max-width: 90%; /* Allow messages to take more width on very small screens */
+    padding: 8px 12px;
+    font-size: 0.9rem;
+  }
+  .message-header {
+    font-size: 0.75rem;
+  }
+  .reply-textarea {
+    min-height: 60px;
+  }
+}

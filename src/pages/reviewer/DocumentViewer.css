@@ -1,0 +1,286 @@
+/* General styles for the viewer container */
+.viewer-container {
+  padding: 30px;
+  background: #f0f2f5;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
+}
+
+/* Header Section */
+.viewer-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.viewer-header .back-button {
+  background: none;
+  border: none;
+  color: #007bff;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 8px 12px;
+  border-radius: 6px;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.viewer-header .back-button:hover {
+  background-color: #e6f2ff;
+  color: #0056b3;
+}
+
+.viewer-title {
+  text-align: right;
+}
+
+.viewer-title h2 {
+  margin: 0;
+  font-size: 28px;
+  color: #2c3e50;
+  font-weight: 600;
+}
+
+.viewer-title p {
+  margin: 5px 0 0;
+  font-size: 16px;
+  color: #555;
+}
+
+/* Document Tabs */
+.document-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 25px;
+  justify-content: center;
+}
+
+.tab-button {
+  padding: 10px 20px;
+  border: 1px solid #dcdcdc;
+  background: #ffffff;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 15px;
+  color: #444;
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.tab-button:hover {
+  background-color: #f5f5f5;
+  border-color: #c0c0c0;
+}
+
+.tab-button.active {
+  background: #007bff;
+  color: #fff;
+  border-color: #007bff;
+  box-shadow: 0 4px 8px rgba(0, 123, 255, 0.2);
+}
+
+/* Viewer Content Area */
+.viewer-content {
+  flex-grow: 1;
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden; /* Important for handling large canvas */
+  margin-bottom: 25px;
+  min-height: 500px; /* Ensure content area has a minimum height */
+  position: relative;
+}
+
+.canvas-container {
+  overflow: auto; /* Enable scrolling for the canvas if it's larger than container */
+  max-width: 100%;
+  max-height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px; /* Padding inside the canvas container */
+}
+
+.pdf-canvas {
+  display: block; /* Remove extra space below canvas */
+  border: 1px solid #eee;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  background-color: #fff; /* Ensure canvas background is white */
+}
+
+/* Loader */
+.loader-container {
+  text-align: center;
+  padding: 50px;
+  color: #666;
+}
+
+.loader {
+  border: 6px solid #f3f3f3;
+  border-top: 6px solid #007bff;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 15px auto;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Error Message */
+.error-message, .no-document-selected {
+  text-align: center;
+  padding: 40px;
+  border-radius: 8px;
+  background-color: #ffe6e6;
+  color: #cc0000;
+  border: 1px solid #ffb3b3;
+  width: 70%;
+  margin: auto;
+}
+
+.error-message p, .no-document-selected p {
+  margin: 10px 0;
+  font-size: 16px;
+}
+
+.no-document-selected {
+  background-color: #fff8e1;
+  color: #e6a700;
+  border-color: #ffd700;
+}
+
+.no-document-selected .icon {
+  font-size: 50px;
+  margin-bottom: 15px;
+  display: block;
+}
+
+.no-document-selected h3 {
+  margin-top: 0;
+  font-size: 24px;
+}
+
+/* Toolbar */
+.viewer-toolbar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 15px;
+  background: #ffffff;
+  padding: 15px 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 30px;
+}
+
+.viewer-toolbar button, .viewer-toolbar .download-link {
+  padding: 10px 18px;
+  border: 1px solid #ccc;
+  background: #f8f9fa;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 15px;
+  color: #333;
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+  text-decoration: none; /* For the download link */
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.viewer-toolbar button:hover, .viewer-toolbar .download-link:hover {
+  background: #e9ecef;
+  border-color: #bbb;
+  color: #000;
+}
+
+.viewer-toolbar button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  background-color: #f0f0f0;
+  color: #888;
+}
+
+.viewer-toolbar .page-info {
+  font-size: 16px;
+  font-weight: 500;
+  color: #555;
+  min-width: 120px;
+  text-align: center;
+}
+
+/* Proceed Button */
+.proceed-button-wrapper {
+  text-align: center;
+  margin-top: auto; /* Push to bottom */
+  padding-top: 20px;
+  border-top: 1px solid #e0e0e0;
+}
+
+.proceed-button {
+  background: #28a745;
+  color: #fff;
+  padding: 14px 28px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: 600;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+  box-shadow: 0 4px 10px rgba(40, 167, 69, 0.3);
+}
+
+.proceed-button:hover {
+  background: #218838;
+  transform: translateY(-2px);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .viewer-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .viewer-title {
+    text-align: left;
+    margin-top: 15px;
+  }
+
+  .viewer-toolbar {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .viewer-toolbar button, .viewer-toolbar .download-link, .viewer-toolbar .page-info {
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+  }
+
+  .document-tabs {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .tab-button {
+    width: 100%;
+  }
+}

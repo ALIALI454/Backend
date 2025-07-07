@@ -1,0 +1,130 @@
+.details-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem;
+  background: linear-gradient(to bottom right, #e0f2fe, #ede9fe);
+  min-height: 100vh;
+  font-family: Arial, sans-serif;
+}
+
+.back-button {
+  padding: 10px 20px;
+  background: linear-gradient(to right, #7c3aed, #4f46e5);
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+}
+.back-button:hover {
+  transform: scale(1.05);
+}
+
+.card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  border: 1px solid #eee;
+}
+.card h2,
+.card h3 {
+  margin-bottom: 1rem;
+  color: #111827;
+  border-bottom: 1px solid #e5e7eb;
+  padding-bottom: 0.5rem;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+.col {
+  flex: 1;
+}
+label {
+  display: block;
+  font-size: 0.875rem;
+  color: #6b7280;
+  margin-bottom: 0.3rem;
+}
+p {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #111827;
+}
+
+.status {
+  padding: 4px 10px;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  font-weight: bold;
+  display: inline-block;
+}
+.status.pending {
+  background: #fef9c3;
+  color: #92400e;
+  border: 1px solid #fde68a;
+}
+.status.review {
+  background: #dbeafe;
+  color: #1e40af;
+  border: 1px solid #93c5fd;
+}
+.status.approved {
+  background: #d1fae5;
+  color: #065f46;
+  border: 1px solid #6ee7b7;
+}
+.status.rejected {
+  background: #fee2e2;
+  color: #991b1b;
+  border: 1px solid #fecaca;
+}
+
+.documents,
+.evaluation,
+.next-steps {
+  list-style: none;
+  padding-left: 0;
+}
+.documents li,
+.evaluation li,
+.next-steps li {
+  margin-bottom: 0.5rem;
+  color: #374151;
+}
+
+.eval-status {
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 0.5rem;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+}
+.confirm-button {
+  padding: 12px 24px;
+  background: linear-gradient(to right, #10b981, #059669);
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+}
+.confirm-button:hover {
+  transform: scale(1.05);
+}
+
+.no-data {
+  text-align: center;
+  font-size: 1.1rem;
+  color: #4b5563;
+}

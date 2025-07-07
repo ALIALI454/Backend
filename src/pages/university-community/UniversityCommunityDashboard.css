@@ -1,0 +1,79 @@
+.university-dashboard {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  font-family: 'Arial', sans-serif;
+  background-color: #f0f2f5; /* Light background for the whole page */
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+}
+
+.dashboard-title {
+  color: #2c3e50;
+  margin-bottom: 10px;
+  font-size: 2.2em;
+  font-weight: 700;
+  text-align: center;
+}
+
+.dashboard-description {
+  color: #7f8c8d;
+  margin-bottom: 30px;
+  font-size: 1.1em;
+  text-align: center;
+  border-bottom: 1px solid #e0e0e0;
+  padding-bottom: 20px;
+}
+
+.dashboard-content {
+  display: flex;
+  gap: 30px; /* Space between left and right columns */
+  margin-top: 20px;
+}
+
+.dashboard-left {
+  flex: 1; /* Takes up 1 part of the available space */
+  min-width: 300px; /* Ensures list doesn't get too narrow */
+}
+
+.dashboard-right {
+  flex: 2; /* Takes up 2 parts of the available space */
+}
+
+.promotion-details-placeholder {
+  border: 2px dashed #aed6f1; /* More prominent dashed border */
+  border-radius: 12px;
+  padding: 40px;
+  text-align: center;
+  color: #5d6d7e;
+  background-color: #eaf6ff; /* Light blue background */
+  min-height: 250px; /* Give it some height */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2em;
+  font-weight: 500;
+  box-shadow: inset 0 0 15px rgba(52, 152, 219, 0.1); /* Inner shadow */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .dashboard-content {
+    flex-direction: column; /* Stack columns on smaller screens */
+  }
+
+  .dashboard-left,
+  .dashboard-right {
+    flex: none; /* Remove flex sizing */
+    width: 100%; /* Take full width */
+    margin-right: 0; /* Remove margin */
+  }
+
+  .dashboard-left {
+    margin-bottom: 20px; /* Add space between stacked sections */
+  }
+
+  .dashboard-title {
+    font-size: 1.8em;
+  }
+}

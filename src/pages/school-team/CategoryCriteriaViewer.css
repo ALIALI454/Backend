@@ -1,0 +1,174 @@
+.criteria-viewer-container {
+  max-width: 1100px;
+  margin: 20px auto;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
+}
+
+.viewer-title {
+  text-align: center;
+  font-size: 28px;
+  margin-bottom: 25px;
+  color: #004080;
+  font-weight: 700;
+}
+
+.viewer-layout {
+  display: flex;
+  gap: 20px;
+}
+
+.applicant-list-panel {
+  flex: 1;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 15px;
+  background-color: #f9faff;
+  max-height: 600px;
+  display: flex;
+  flex-direction: column;
+}
+
+.search-container {
+  margin-bottom: 15px;
+}
+
+.search-input {
+  width: 100%;
+  padding: 8px 12px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 1px solid #bbb;
+  transition: border-color 0.3s ease;
+}
+
+.search-input:focus {
+  border-color: #004080;
+  outline: none;
+}
+
+.applicant-list {
+  overflow-y: auto;
+  flex-grow: 1;
+  border-top: 1px solid #ddd;
+  padding-top: 10px;
+}
+
+.applicant-card {
+  background-color: white;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  padding: 12px 15px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+.applicant-card:hover {
+  border-color: #004080;
+  background-color: #e6f0ff;
+}
+
+.applicant-card.selected {
+  border-color: #004080;
+  background-color: #cce0ff;
+  font-weight: 600;
+}
+
+.no-results {
+  color: #777;
+  font-style: italic;
+  text-align: center;
+  margin-top: 40px;
+}
+
+.criteria-display-panel {
+  flex: 2;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  background-color: #fff;
+  max-height: 600px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.no-applicant-selected {
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-style: italic;
+  color: #555;
+  font-size: 18px;
+  text-align: center;
+  padding: 20px;
+}
+
+.applicant-header {
+  border-bottom: 2px solid #004080;
+  margin-bottom: 20px;
+}
+
+.applicant-header h3 {
+  margin: 0 0 5px 0;
+  color: #004080;
+}
+
+.applicant-header .department {
+  font-style: italic;
+  color: #666;
+  margin-bottom: 10px;
+}
+
+.position-change {
+  font-size: 18px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.position-change .arrow {
+  font-size: 22px;
+  color: #004080;
+}
+
+.criteria-sections {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.criteria-section h4 {
+  margin-bottom: 10px;
+  border-bottom: 1px solid #004080;
+  padding-bottom: 6px;
+  color: #004080;
+}
+
+.criteria-details p {
+  margin: 4px 0;
+}
+
+.points {
+  font-weight: 700;
+  color: #007700;
+}
+
+.category-item h5 {
+  margin: 10px 0 5px 0;
+  color: #003366;
+}
+
+.category-item ul {
+  list-style-type: circle;
+  padding-left: 20px;
+  margin: 0;
+}
+
+.category-item ul li {
+  margin-bottom: 4px;
+  font-size: 15px;
+}
