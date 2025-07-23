@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import "./PromotionDetails.css";
 
@@ -68,8 +68,9 @@ const promotions = [
 const PromotionDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const [viewVisible, setViewVisible] = useState(false);
 
-  const promotion = promotions.find((p) => p.id === parseInt(id));
+  const promotion = promotions.find((p) => p.id === parseInt(id, 10));
 
   if (!promotion) {
     return (
@@ -82,42 +83,47 @@ const PromotionDetails = () => {
     );
   }
 
-  const handleViewAndDownload = () => {
-    if (promotion.documents?.announcement) {
-      window.open(promotion.documents.announcement, "_blank");
-      navigate(`/university-community/list/${promotion.id}`);
-    } else {
-      alert("No announcement document available for this promotion.");
-    }
+  const handleView = () => {
+    setViewVisible(true);
+  };
+
+  const handleDownloadRedirect = () => {
+    navigate(`/university-community/list/${promotion.id}`);
   };
 
   return (
     <div className="promotion-details-container">
       <div className="promotion-details-card">
         <h2 className="promotion-details-title">{promotion.applicantName}</h2>
-        <div className="promotion-info">
-          <p>
-            <span className="info-label">Department:</span> {promotion.department}
-          </p>
-          <p>
-            <span className="info-label">From:</span> {promotion.previousPosition}
-          </p>
-          <p>
-            <span className="info-label">To:</span> {promotion.newPosition}
-          </p>
-          <p>
-            <span className="info-label">Approved:</span> {promotion.approvalDate}
-          </p>
-          <p>
-            <span className="info-label">Effective:</span> {promotion.effectiveDate}
-          </p>
-        </div>
-        <div
-          className="view-download-link"
-          onClick={handleViewAndDownload}
-        >
-          📄 View & Download Announcement
-        </div>
+
+        {!viewVisible ? (
+          <div className="view-download-link" onClick={handleView}>
+            📄 View Details
+          </div>
+        ) : (
+          <>
+            <div className="promotion-info">
+              <p>
+                <span className="info-label">Department:</span> {promotion.department}
+              </p>
+              <p>
+                <span className="info-label">From:</span> {promotion.previousPosition}
+              </p>
+              <p>
+                <span className="info-label">To:</span> {promotion.newPosition}
+              </p>
+              <p>
+                <span className="info-label">Approved:</span> {promotion.approvalDate}
+              </p>
+              <p>
+                <span className="info-label">Effective:</span> {promotion.effectiveDate}
+              </p>
+            </div>
+            <button className="download-button" onClick={handleDownloadRedirect}>
+              Go to Download Announcement
+            </button>
+          </>
+        )}
       </div>
     </div>
   );

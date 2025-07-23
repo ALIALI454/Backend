@@ -48,7 +48,7 @@ const ForwardButton = () => {
       <div className="forward-section">
         <h3 className="forward-subtitle">Select Applications to Forward</h3>
         <div className="applications-list">
-          {applications.map((app, index) => (
+          {applications.map(app => (
             <div
               key={app.id}
               className={`application-item ${selectedApplications.includes(app.id) ? 'selected' : ''}`}
@@ -84,8 +84,6 @@ const ForwardButton = () => {
             className="form-select"
           >
             <option value="university-committee">University Promotion Committee</option>
-            {/* <option value="hr-board">HR Board</option>
-            <option value="external-reviewers">External Reviewers</option> */}
           </select>
         </div>
 

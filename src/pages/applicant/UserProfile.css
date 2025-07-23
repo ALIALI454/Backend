@@ -1,0 +1,266 @@
+/* src/pages/applicant/UserProfile.css */
+
+.user-profile-container {
+  max-width: 600px; /* Slightly wider for a more spacious feel */
+  margin: 40px auto;
+  padding: 35px; /* Increased padding */
+  background-color: #ffffff;
+  border-radius: 15px; /* More rounded corners */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); /* Softer, larger shadow */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
+  transition: all 0.3s ease-in-out;
+}
+
+.user-profile-container:hover {
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15); /* More prominent shadow on hover */
+}
+
+.profile-title {
+  font-size: 2.5em; /* Larger title */
+  font-weight: 700;
+  color: #4a5568; /* Darker, more professional color */
+  margin-bottom: 30px;
+  text-align: center;
+  position: relative;
+  padding-bottom: 10px;
+}
+
+.profile-title::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 0;
+  width: 60px;
+  height: 4px;
+  background-color: #6a11cb; /* A vibrant accent color */
+  border-radius: 2px;
+}
+
+.profile-message {
+  padding: 12px 20px;
+  border-radius: 8px;
+  margin-bottom: 25px;
+  font-weight: 500;
+  text-align: center;
+  animation: fadeIn 0.5s ease-out;
+}
+
+.profile-message.success {
+  background-color: #e6ffed;
+  color: #2f855a;
+  border: 1px solid #68d391;
+}
+
+.profile-message.error {
+  background-color: #fff5f5;
+  color: #c53030;
+  border: 1px solid #feb2b2;
+}
+
+.profile-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px; /* Space between form groups */
+}
+
+.form-group {
+  margin-bottom: 10px; /* Adjust if gap is too much */
+}
+
+.form-label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #4a5568;
+  font-size: 0.95em;
+}
+
+.required-star {
+  color: #e53e3e;
+}
+
+.form-input {
+  width: 100%;
+  padding: 12px 15px;
+  border: 1px solid #cbd5e0; /* Light gray border */
+  border-radius: 8px;
+  font-size: 1em;
+  color: #4a5568;
+  transition: all 0.3s ease;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: #6a11cb; /* Focus color */
+  box-shadow: 0 0 0 3px rgba(106, 17, 203, 0.2); /* Soft glow on focus */
+}
+
+.form-input.input-error {
+  border-color: #e53e3e;
+}
+
+.error-message {
+  color: #e53e3e;
+  font-size: 0.85em;
+  margin-top: 5px;
+}
+
+/* Image Upload Specific Styles */
+.image-upload-group {
+  text-align: center;
+  margin-bottom: 30px; /* More space for image area */
+}
+
+.image-preview-area {
+  margin-bottom: 15px;
+}
+
+.profile-image-preview {
+  width: 120px; /* Larger preview image */
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid #f0f4f8; /* Lighter border */
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease-in-out;
+}
+
+.profile-image-preview:hover {
+  transform: scale(1.05);
+}
+
+.no-image-placeholder {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background-color: #e2e8f0; /* Lighter gray placeholder */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #a0aec0;
+  font-size: 0.9em;
+  font-weight: 500;
+  margin: 0 auto;
+  border: 2px dashed #a0aec0;
+}
+
+.file-input {
+  display: block;
+  margin: 10px auto 0;
+  width: max-content;
+  color: #4a5568;
+  font-size: 0.9em;
+  cursor: pointer;
+}
+
+.file-input::file-selector-button {
+  background-color: #2575fc; /* Matching primary button */
+  color: white;
+  padding: 8px 15px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-right: 10px;
+}
+
+.file-input::file-selector-button:hover {
+  background-color: #1a5acf;
+}
+
+
+/* Submit Button */
+.submit-button {
+  width: 100%;
+  padding: 15px; /* Larger padding */
+  background-image: linear-gradient(to right, #6a11cb 0%, #2575fc 100%); /* Gradient background */
+  color: #ffffff;
+  border: none;
+  border-radius: 8px; /* Slightly less rounded than before */
+  font-size: 1.1em; /* Larger font */
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); /* Shadow for depth */
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.submit-button:hover {
+  transform: translateY(-3px); /* Lift effect on hover */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  opacity: 0.95;
+}
+
+.submit-button.loading {
+  opacity: 0.7;
+  cursor: not-allowed;
+  background-image: linear-gradient(to right, #a777e3 0%, #7dbbf7 100%); /* Lighter gradient when loading */
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .user-profile-container {
+    margin: 20px;
+    padding: 25px;
+  }
+
+  .profile-title {
+    font-size: 2em;
+    margin-bottom: 25px;
+  }
+
+  .profile-form {
+    gap: 15px;
+  }
+
+  .form-input,
+  .submit-button {
+    padding: 10px 12px;
+    font-size: 1em;
+  }
+
+  .profile-image-preview,
+  .no-image-placeholder {
+    width: 100px;
+    height: 100px;
+  }
+}
+
+@media (max-width: 480px) {
+  .user-profile-container {
+    margin: 15px;
+    padding: 20px;
+    border-radius: 10px;
+  }
+
+  .profile-title {
+    font-size: 1.8em;
+    margin-bottom: 20px;
+  }
+
+  .form-input,
+  .submit-button {
+    font-size: 0.95em;
+  }
+
+  .file-input::file-selector-button {
+    padding: 6px 12px;
+    font-size: 0.85em;
+  }
+}

@@ -149,6 +149,7 @@ const Sidebar = () => {
     switch (user.role) {
       case 'applicant':
         return [
+          {path: '/applicant/profile', name: 'User Profile', icon:'👤'},
           { path: '/applicant/criteria', name: 'Category Criteria', icon: '📋' },
           { path: '/applicant/application', name: 'Application Form', icon: '📝' },
           { path: '/applicant/upload', name: 'Upload Documents', icon: '📤' },
@@ -170,8 +171,8 @@ const Sidebar = () => {
           { path: '/university-committee/applications', name: 'Applications Queue', icon: '📑' },
           { path: '/university-committee/application-details', name: 'Application Details', icon: '📄' },
           { path: '/university-committee/feedback', name: 'Feedback', icon: '✏️' },
-          { path: '/university-committee/decision', name: 'Decision Form', icon: '✅' },
-          { path: '/university-committee/submit-decision', name: 'Submit Decision', icon: '📤' },
+          // { path: '/university-committee/decision', name: 'Decision Form', icon: '✅' },
+          // { path: '/university-committee/submit-decision', name: 'Submit Decision', icon: '📤' },
           { path: '/university-committee/review-summary', name: 'Review Summary', icon: '📝' },
         ];
       case 'reviewer':

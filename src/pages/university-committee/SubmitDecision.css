@@ -1,133 +1,104 @@
-/* src/pages/university-committee/SubmitDecision.css */
-
-.submit-wrapper {
-  padding: 24px;
-  max-width: 720px;
-  margin: auto;
-  background-color: #f9fafb;
-  min-height: 100vh;
-  font-family: 'Segoe UI', sans-serif;
+.decision-container {
+  max-width: 800px;
+  margin: 30px auto;
+  padding: 20px;
+  background: #f9fafc;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
 }
 
-.submit-header {
-  display: flex;
-  align-items: center;
-  margin-bottom: 24px;
+.decision-container h2 {
+  font-size: 26px;
+  font-weight: 700;
+  color: #2c3e50;
+  margin-bottom: 15px;
+  text-align: center;
 }
 
-.back-btn {
-  margin-right: 12px;
-  padding: 6px 10px;
-  font-size: 18px;
-  color: #4f46e5;
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-}
-
-.submit-box {
-  background: #fff;
-  padding: 24px;
-  border-radius: 12px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-  border: 1px solid #e5e7eb;
-  margin-bottom: 24px;
-}
-
-.submit-box h2 {
-  font-size: 20px;
+.decision-container p {
+  font-size: 15px;
+  color: #555;
+  text-align: center;
   margin-bottom: 20px;
-  color: #1f2937;
 }
 
-.submit-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 16px;
-  margin-bottom: 24px;
-}
-
-.info-block {
-  background-color: #f3f4f6;
-  padding: 12px;
-  border-radius: 8px;
-}
-
-.label {
-  font-size: 14px;
-  color: #6b7280;
-  margin-bottom: 4px;
-}
-
-.decision-pill {
-  display: inline-block;
-  padding: 8px 16px;
-  border-radius: 9999px;
-  font-weight: 500;
-  border: 1px solid;
-}
-
-.decision-approve {
-  background-color: #d1fae5;
-  color: #065f46;
-  border-color: #a7f3d0;
-}
-
-.decision-reject {
-  background-color: #fee2e2;
-  color: #991b1b;
-  border-color: #fecaca;
-}
-
-.decision-request {
-  background-color: #fef3c7;
-  color: #92400e;
-  border-color: #fde68a;
-}
-
-.decision-default {
-  background-color: #e5e7eb;
-  color: #374151;
-  border-color: #d1d5db;
-}
-
-.comments-box {
-  background-color: #f3f4f6;
-  padding: 12px;
-  border-radius: 8px;
-  white-space: pre-wrap;
-}
-
-.submit-footer {
-  display: flex;
-  justify-content: flex-end;
-  gap: 12px;
-  padding-top: 16px;
-  border-top: 1px solid #e5e7eb;
-}
-
-.cancel-btn {
-  padding: 10px 20px;
+.review-summary-preview {
   background: #fff;
-  border: 1px solid #d1d5db;
-  color: #374151;
+  padding: 15px;
   border-radius: 8px;
-  cursor: pointer;
+  margin-bottom: 20px;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.05);
 }
 
-.confirm-btn {
-  padding: 10px 20px;
-  background: linear-gradient(to right, #059669, #047857);
-  color: white;
+.review-summary-preview h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.review-summary-preview ul {
+  list-style: none;
+  padding: 0;
+}
+
+.review-summary-preview li {
+  background: #f4f6f8;
+  padding: 8px;
+  border-radius: 5px;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+.tag {
+  font-weight: bold;
+  padding: 2px 6px;
+  border-radius: 5px;
+  color: #fff;
+}
+
+.tag.approve {
+  background: #27ae60;
+}
+
+.tag.revise {
+  background: #f39c12;
+}
+
+.tag.reject {
+  background: #e74c3c;
+}
+
+.decision-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.decision-form label {
+  margin-top: 10px;
+  font-weight: 600;
+  color: #34495e;
+}
+
+.decision-form select,
+.decision-form textarea {
+  margin-top: 5px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.submit-btn {
+  margin-top: 20px;
+  background: #2c3e50;
+  color: #fff;
+  padding: 12px;
   border: none;
   border-radius: 8px;
-  font-weight: 500;
+  font-size: 16px;
+  font-weight: 600;
   cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 6px;
 }
 
-.confirm-btn:hover {
-  background: linear-gradient(to right, #047857, #065f46);
+.submit-btn:hover {
+  background: #1a252f;
 }

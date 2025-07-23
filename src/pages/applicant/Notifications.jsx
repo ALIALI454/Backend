@@ -1,36 +1,19 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 const Notifications = () => {
-  const [notifications, setNotifications] = useState([
-    {
-      id: 1,
-      title: "Application Received",
-      message: "Your promotion application has been received by the School Promotion Team.",
-      date: "2023-11-10",
-      read: false
-    },
-    {
-      id: 2,
-      title: "Document Verification",
-      message: "All your submitted documents have been verified.",
-      date: "2023-11-12",
-      read: false
-    },
-    {
-      id: 3,
-      title: "Application Forwarded",
-      message: "Your application has been forwarded to the University Committee.",
-      date: "2023-11-19",
-      read: false
-    }
-  ]);
+  const [notifications, setNotifications] = useState([]);
+
+  useEffect(() => {
+    const stored = JSON.parse(localStorage.getItem('applicantNotifications')) || [];
+    setNotifications(stored);
+  }, []);
 
   const markAsRead = (id) => {
-    setNotifications(prev =>
-      prev.map(notification =>
-        notification.id === id ? { ...notification, read: true } : notification
-      )
+    const updated = notifications.map(n =>
+      n.id === id ? { ...n, read: true } : n
     );
+    setNotifications(updated);
+    localStorage.setItem('applicantNotifications', JSON.stringify(updated));
   };
 
   return (

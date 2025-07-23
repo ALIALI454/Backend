@@ -1,204 +1,171 @@
 .review-summary-container {
-  padding: 24px;
-  max-width: 1100px;
-  margin: auto;
-  background-color: #f9fafb;
-  min-height: 100vh;
+  padding: 30px;
+  background-color: #f8f9fa; /* Light background for the page */
+  min-height: calc(100vh - 60px); /* Adjust based on your header/footer height */
+  font-family: 'Arial', sans-serif;
+  color: #333;
 }
 
-.back-header {
-  display: flex;
-  align-items: center;
-  margin-bottom: 32px;
-}
-
-.back-button {
-  margin-right: 16px;
-  padding: 8px;
-  font-size: 20px;
-  border: none;
-  background: transparent;
-  color: #4f46e5;
-  cursor: pointer;
-}
-
-.page-title {
-  font-size: 24px;
-  font-weight: bold;
-  color: #1f2937;
-}
-
-.card-section {
-  background-color: white;
-  padding: 24px;
-  border-radius: 12px;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.06);
-  border: 1px solid #e5e7eb;
-  margin-bottom: 32px;
-}
-
-.section-title {
-  font-size: 20px;
+.review-summary-container h2 {
+  text-align: center;
+  color: #2c3e50; /* Dark blue for heading */
+  margin-bottom: 40px;
+  font-size: 2.2em;
   font-weight: 600;
-  color: #1f2937;
-  margin-bottom: 24px;
+  border-bottom: 3px solid #007bff; /* Blue underline */
+  display: inline-block;
+  padding-bottom: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  width: fit-content;
 }
 
-.info-grid {
+.review-summary-container > p { /* For "No reviews submitted yet." */
+  text-align: center;
+  font-size: 1.2em;
+  color: #666;
+  margin-top: 50px;
+}
+
+.review-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 16px;
-}
-
-.info-box {
-  background-color: #f9fafb;
-  padding: 16px;
-  border-radius: 8px;
-}
-
-.info-label {
-  font-size: 14px;
-  color: #6b7280;
-  margin-bottom: 4px;
-}
-
-.info-value {
-  font-weight: 500;
-  color: #111827;
-}
-
-.review-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 24px;
-}
-
-.review-count {
-  font-size: 14px;
-  color: #6b7280;
-}
-
-.review-list {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); /* Adjusted min-width for new section */
+  gap: 30px; /* Space between cards */
+  max-width: 1200px; /* Max width for the grid */
+  margin: 0 auto; /* Center the grid */
 }
 
 .review-card {
-  border: 1px solid #e5e7eb;
-  border-radius: 8px;
-  padding: 20px;
-  transition: border 0.3s;
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  padding: 25px;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
 }
 
 .review-card:hover {
-  border-color: #6366f1;
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
 }
 
-.review-top {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 12px;
+.review-card h3 {
+  color: #007bff; /* Blue for application ID */
+  margin-top: 0;
+  margin-bottom: 15px;
+  font-size: 1.4em;
+  border-bottom: 2px solid #e9ecef;
+  padding-bottom: 10px;
 }
 
-.review-avatar {
-  background-color: #eef2ff;
-  color: #4f46e5;
+.review-card p {
+  margin-bottom: 10px;
+  line-height: 1.6;
+  font-size: 0.95em;
+}
+
+.review-card p strong {
+  color: #495057; /* Slightly darker for bold labels */
+  margin-right: 5px;
+}
+
+.recommendation-tag {
+  padding: 8px 15px;
+  border-radius: 5px;
+  font-weight: bold;
+  text-align: center;
+  margin: 15px 0;
+  font-size: 1em;
+  display: inline-block; /* Make it fit content */
+}
+
+/* Specific colors for recommendation tags */
+.recommendation-tag.approve {
+  background-color: #d4edda; /* Light green */
+  color: #155724; /* Dark green text */
+  border: 1px solid #c3e6cb;
+}
+
+.recommendation-tag.revise {
+  background-color: #fff3cd; /* Light yellow */
+  color: #856404; /* Dark yellow text */
+  border: 1px solid #ffeeba;
+}
+
+.recommendation-tag.reject {
+  background-color: #f8d7da; /* Light red */
+  color: #721c24; /* Dark red text */
+  border: 1px solid #f5c6cb;
+}
+
+.review-card .submitted-at {
+  margin-top: auto; /* Push to bottom of card */
+  font-size: 0.85em;
+  color: #777;
+  text-align: right;
+  padding-top: 15px;
+  border-top: 1px dashed #eee;
+}
+
+/* --- Committee Decision Section Styling --- */
+.decision-section {
+  border-top: 1px solid #e0e0e0;
+  padding-top: 20px;
+  margin-top: 20px;
+  background-color: #fcfcfc; /* Slightly different background for distinction */
+  border-radius: 0 0 10px 10px; /* Round bottom corners if card has them */
+  padding-bottom: 0; /* Remove padding if it adds extra space */
+}
+
+.decision-section h4 {
+  color: #34495e; /* Darker blue for committee decision heading */
+  margin-bottom: 15px;
+  font-size: 1.15em;
   font-weight: 600;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  margin-right: 12px;
-  font-size: 16px;
 }
 
-.reviewer-name {
-  flex: 1;
-  font-weight: 500;
-  color: #1f2937;
+.decision-section select,
+.decision-section textarea {
+  width: calc(100% - 20px); /* Account for padding */
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 0.95em;
+  box-sizing: border-box; /* Include padding in width */
+  transition: border-color 0.3s ease;
 }
 
-.recommendation {
-  padding: 6px 12px;
-  font-size: 14px;
-  border-radius: 9999px;
-  border: 1px solid;
-  font-weight: 500;
+.decision-section select:focus,
+.decision-section textarea:focus {
+  border-color: #007bff;
+  outline: none;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.25);
 }
 
-.recommend-amber {
-  background-color: #fef3c7;
-  color: #92400e;
-  border-color: #fcd34d;
+.decision-section textarea {
+  min-height: 80px; /* Reasonable height for reason */
+  resize: vertical; /* Allow vertical resizing */
 }
 
-.recommend-green {
-  background-color: #d1fae5;
-  color: #065f46;
-  border-color: #6ee7b7;
-}
-
-.recommend-gray {
-  background-color: #f3f4f6;
-  color: #374151;
-  border-color: #d1d5db;
-}
-
-.review-comment {
-  margin-left: 52px;
-  background-color: #f9fafb;
+.submit-decision-btn {
+  display: block;
+  width: 100%;
   padding: 12px;
-  border-radius: 8px;
-  color: #4b5563;
-}
-
-.action-buttons {
-  display: flex;
-  flex-direction: column-reverse;
-  gap: 16px;
-  justify-content: flex-end;
-  border-top: 1px solid #e5e7eb;
-  padding-top: 24px;
-}
-
-@media (min-width: 640px) {
-  .action-buttons {
-    flex-direction: row;
-  }
-}
-
-.btn-primary {
-  padding: 10px 24px;
-  background: linear-gradient(to right, #4f46e5, #2563eb);
+  background-color: #17a2b8; /* Info blue for decision button */
   color: white;
-  font-weight: 500;
-  border-radius: 8px;
   border: none;
+  border-radius: 5px;
+  font-size: 1em;
+  font-weight: bold;
   cursor: pointer;
-  display: flex;
-  align-items: center;
-  transition: 0.3s;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  margin-top: 10px; /* Space above button */
 }
 
-.btn-primary:hover {
-  background: linear-gradient(to right, #4338ca, #1e40af);
-}
-
-.btn-secondary {
-  padding: 10px 24px;
-  border: 1px solid #d1d5db;
-  background: white;
-  color: #374151;
-  font-weight: 500;
-  border-radius: 8px;
-  cursor: pointer;
-}
-
-.btn-secondary:hover {
-  background-color: #f3f4f6;
+.submit-decision-btn:hover {
+  background-color: #138496; /* Darker blue on hover */
+  transform: translateY(-2px);
 }

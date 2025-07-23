@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { FaUser, FaEnvelope, FaLock, FaSignInAlt } from 'react-icons/fa';
-import suzaLogo from '../assets/suza-logo.jpeg'; // Hakikisha path ni sahihi kabisa
-import './Login.css'; // Hakikisha hii ipo hapa!
+import suzaLogo from '../assets/suza-logo.jpeg'; // Hakikisha path ni sahihi
+import './Login.css';
 
 const Login = () => {
   const [credentials, setCredentials] = useState({
@@ -13,7 +13,7 @@ const Login = () => {
   });
   const [error, setError] = useState('');
   const navigate = useNavigate();
-  const { login } = useAuth(); // Hakikisha useAuth context inafanya kazi
+  const { login } = useAuth();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -27,16 +27,16 @@ const Login = () => {
     e.preventDefault();
 
     if (!credentials.email || !credentials.password) {
-      setError('Tafadhali jaza sehemu zote.');
+      setError('Please fill in all fields.');
       return;
     }
 
     if (credentials.password.length < 6) {
-      setError('Neno la siri lazima liwe angalau herufi 6.');
+      setError('Password must be at least 6 characters.');
       return;
     }
 
-    // Simulate login function from context (hii ni simulation tu)
+    // Simulated login (badilisha na backend logic)
     login({ email: credentials.email, role: credentials.role });
 
     const redirectPaths = {
@@ -54,61 +54,29 @@ const Login = () => {
   };
 
   return (
-    <div className="login-wrapper"> {/* Kifunga kikuu cha ukurasa mzima */}
-      <div className="login-container"> {/* Container kuu ya fomu */}
-        <div className="logo-section"> {/* Sehemu ya logo */}
+    <div className="login-wrapper">
+      <div className="login-container">
+        <div className="logo-section">
           <img src={suzaLogo} alt="SUZA Logo" className="suza-logo" />
         </div>
 
-        <div className="login-header"> {/* Sehemu ya vichwa vya habari */}
+        <div className="login-header">
           <h1 className="system-title">SUZA PROMOTION GUIDELINE SYSTEM</h1>
           <h2 className="page-title">
             <FaSignInAlt className="icon-mr" />
-            Ingia kwenye Akaunti Yako
+            Sign In to Your Account
           </h2>
         </div>
 
-        {error && <div className="error-message show-error">{error}</div>} {/* Ujumbe wa makosa */}
+        {error && <div className="error-message show-error">{error}</div>}
 
         <form onSubmit={handleSubmit} className="login-form">
-          <div className="form-group">
-            <label htmlFor="email" className="form-label">
-              <FaEnvelope className="icon-mr" />
-              Barua pepe
-            </label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              value={credentials.email}
-              onChange={handleChange}
-              required
-              className="login-input"
-              placeholder="Ingiza barua pepe yako"
-            />
-          </div>
 
-          <div className="form-group">
-            <label htmlFor="password" className="form-label">
-              <FaLock className="icon-mr" />
-              Neno la siri
-            </label>
-            <input
-              type="password"
-              id="password"
-              name="password"
-              value={credentials.password}
-              onChange={handleChange}
-              required
-              className="login-input"
-              placeholder="Ingiza neno lako la siri"
-            />
-          </div>
-
+          {/* Hii imeletwa juu */}
           <div className="form-group">
             <label htmlFor="role" className="form-label">
               <FaUser className="icon-mr" />
-              Nafasi
+              Select Role
             </label>
             <select
               id="role"
@@ -118,29 +86,65 @@ const Login = () => {
               required
               className="login-select"
             >
-              <option value="applicant">Mwombaji</option>
-              <option value="school-team">Timu ya Ukuzaji ya Shule/Taasisi</option>
-              <option value="university-committee">Kamati ya Chuo Kikuu</option>
-              <option value="reviewer">Mhakiki</option>
-              <option value="hr-board">Bodi ya Utumishi</option>
-              <option value="university-council">Baraza la Chuo Kikuu</option>
-              <option value="university-community">Jumuiya ya Chuo Kikuu</option>
+              <option value="applicant">Applicant</option>
+              <option value="school-team">School/Institution Promotion Team</option>
+              <option value="university-committee">University Committee</option>
+              <option value="reviewer">Reviewer</option>
+              <option value="hr-board">HR Board</option>
+              <option value="university-council">University Council</option>
+              <option value="university-community">University Community</option>
             </select>
+          </div>
+
+          {/* Email */}
+          <div className="form-group">
+            <label htmlFor="email" className="form-label">
+              <FaEnvelope className="icon-mr" />
+              Email Address
+            </label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              value={credentials.email}
+              onChange={handleChange}
+              required
+              className="login-input"
+              placeholder="Enter your email address"
+            />
+          </div>
+
+          {/* Password */}
+          <div className="form-group">
+            <label htmlFor="password" className="form-label">
+              <FaLock className="icon-mr" />
+              Password
+            </label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              value={credentials.password}
+              onChange={handleChange}
+              required
+              className="login-input"
+              placeholder="Enter your password"
+            />
           </div>
 
           <button type="submit" className="login-button">
             <FaSignInAlt className="icon-mr" />
-            Ingia
+            Sign In
           </button>
         </form>
 
         <div className="login-footer">
           <p className="footer-text">
-            Huna akaunti?{' '}
-            <Link to="/register" className="footer-link">Jisajili</Link>
+            Don't have an account?{' '}
+            <Link to="/register" className="footer-link">Register</Link>
           </p>
           <p className="footer-text">
-            <Link to="/forgot-password" className="footer-link">Umesahau neno la siri?</Link>
+            <Link to="/forgot-password" className="footer-link">Forgot Password?</Link>
           </p>
         </div>
       </div>

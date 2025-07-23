@@ -1,74 +1,48 @@
-import React, { useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
-import './FeedbackForm.css'; // Hakikisha unatumia CSS mpya
+import React, { useState } from "react";
+import "./FeedbackForm.css";
 
-const FeedbackForm = () => {
-  const { state } = useLocation();
-  const navigate = useNavigate();
-  const application = state?.application || {};
-
-  const [feedback, setFeedback] = useState('');
-  const [recommendation, setRecommendation] = useState('approve');
+const FeedbackForm = ({ recipient = "Committee" }) => {
+  // recipient can be "Committee" or "Applicant" or any string passed as prop
+  const [feedback, setFeedback] = useState("");
+  const [error, setError] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Hapa unaweza kuhamisha feedback kwenda server au context
-    console.log('Feedback Submitted:', {
-      applicant: application.name,
-      feedback: feedback,
-      recommendation: recommendation
-    });
-    // Baada ya kutuma, unaweza kurejea ukurasa wa nyuma au kwenda ukurasa wa uthibitisho
-    navigate('/reviewer/review', {
-      state: { application, feedback, recommendation, submitted: true }
-    });
+    if (feedback.trim() === "") {
+      setError("Feedback cannot be empty.");
+      setSuccessMessage("");
+      return;
+    }
+
+    // Here you can send feedback to backend via API call, e.g., fetch or axios
+    // For now, we simulate success:
+    console.log(`Feedback sent to ${recipient}:`, feedback);
+    setSuccessMessage("Feedback submitted successfully.");
+    setError("");
+    setFeedback("");
   };
 
   return (
-    <div className="feedback-container">
-      <div className="feedback-header">
-        <h1>Provide Feedback</h1>
-        <p className="subtitle">For Application: <span className="applicant-name">{application.name || 'N/A'}</span></p>
-      </div>
+    <div className="feedback-form-container">
+      <h2>Send Feedback to {recipient}</h2>
+      <form onSubmit={handleSubmit} className="feedback-form">
+        <label htmlFor="feedback-textarea">Feedback:</label>
+        <textarea
+          id="feedback-textarea"
+          value={feedback}
+          onChange={(e) => setFeedback(e.target.value)}
+          placeholder={`Write your feedback to the ${recipient.toLowerCase()} here...`}
+          rows={6}
+          required
+        />
 
-      <form onSubmit={handleSubmit} className="feedback-form-content">
-        <div className="form-group">
-          <label htmlFor="feedback-text">
-            Your Feedback:
-          </label>
-          <textarea
-            id="feedback-text"
-            value={feedback}
-            onChange={(e) => setFeedback(e.target.value)}
-            placeholder="Write your detailed comments and observations here..."
-            rows="8" // Ongeza urefu wa textarea
-            required
-          />
-        </div>
+        {error && <p className="error-msg">{error}</p>}
+        {successMessage && <p className="success-msg">{successMessage}</p>}
 
-        <div className="form-group">
-          <label htmlFor="recommendation-select">
-            Recommendation:
-          </label>
-          <select
-            id="recommendation-select"
-            value={recommendation}
-            onChange={(e) => setRecommendation(e.target.value)}
-          >
-            <option value="approve">✅ Approve Application</option>
-            <option value="revise">📝 Request Revision</option>
-            <option value="reject">❌ Reject Application</option>
-          </select>
-        </div>
-
-        <div className="form-actions">
-          <button type="button" className="back-button" onClick={() => navigate(-1)}>
-            ⬅️ Back
-          </button>
-          <button type="submit" className="submit-button">
-            Submit Feedback ➡️
-          </button>
-        </div>
+        <button type="submit" className="submit-btn">
+          Submit Feedback
+        </button>
       </form>
     </div>
   );

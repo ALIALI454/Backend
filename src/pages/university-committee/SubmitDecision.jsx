@@ -1,76 +1,91 @@
-// src/pages/university-committee/SubmitDecision.jsx
-import React from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
-import './SubmitDecision.css'; // External CSS
+import React, { useEffect, useState } from "react";
+import "./SubmitDecision.css";
 
 const SubmitDecision = () => {
-  const { state } = useLocation();
-  const navigate = useNavigate();
-  const { application, decision, comments } = state || {};
+  const [reviews, setReviews] = useState([]);
+  const [decision, setDecision] = useState("");
+  const [committeeComments, setCommitteeComments] = useState("");
+  const [submitted, setSubmitted] = useState(false);
 
-  const handleConfirm = () => {
-    console.log('Final decision submitted:', { application, decision, comments });
-    navigate('/university-committee/confirmation', {
-      state: { message: "Decision submitted successfully!" }
-    });
-  };
+  useEffect(() => {
+    const storedReviews = JSON.parse(localStorage.getItem("submittedReviews")) || [];
+    setReviews(storedReviews);
+  }, []);
 
-  const getDecisionClass = () => {
-    switch (decision) {
-      case 'Approve':
-        return 'decision-approve';
-      case 'Reject':
-        return 'decision-reject';
-      case 'RequestChanges':
-        return 'decision-request';
-      default:
-        return 'decision-default';
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (!decision) {
+      alert("Please select a decision before submitting.");
+      return;
     }
+
+    const decisionData = {
+      reviews,
+      finalDecision: decision,
+      committeeComments,
+      decidedAt: new Date().toISOString(),
+    };
+
+    // Save decision to localStorage (simulate backend)
+    localStorage.setItem("committeeDecisions", JSON.stringify(decisionData));
+
+    alert("Decision submitted successfully to HR Board!");
+    setSubmitted(true);
   };
+
+  if (submitted) {
+    return (
+      <div className="decision-container">
+        <h2>Decision Submitted</h2>
+        <p>Your decision has been forwarded to the HR Board.</p>
+      </div>
+    );
+  }
 
   return (
-    <div className="submit-wrapper">
-      <div className="submit-header">
-        <button onClick={() => navigate(-1)} className="back-btn">
-          ←
-        </button>
-        <h1>Confirm Decision</h1>
+    <div className="decision-container">
+      <h2>Committee Final Decision</h2>
+      <p>Please review the collected reviews and provide the committee’s final decision.</p>
+
+      <div className="review-summary-preview">
+        <h3>Collected Reviews:</h3>
+        {reviews.length === 0 ? (
+          <p>No reviews available.</p>
+        ) : (
+          <ul>
+            {reviews.map((rev, idx) => (
+              <li key={idx}>
+                <strong>Application {rev.applicationId}</strong> - Recommendation:{" "}
+                <span className={`tag ${rev.recommendation}`}>
+                  {rev.recommendation.toUpperCase()}
+                </span>{" "}
+                (By {rev.reviewerName})
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
 
-      <div className="submit-box">
-        <h2>Decision Summary</h2>
-        <div className="submit-grid">
-          <div className="info-block">
-            <p className="label">Applicant</p>
-            <p>{application?.name || 'N/A'}</p>
-          </div>
-          <div className="info-block">
-            <p className="label">Current Position</p>
-            <p>{application?.currentPosition || 'N/A'}</p>
-          </div>
-        </div>
+      <form onSubmit={handleSubmit} className="decision-form">
+        <label>Final Decision:</label>
+        <select value={decision} onChange={(e) => setDecision(e.target.value)} required>
+          <option value="">-- Select Decision --</option>
+          <option value="approve">✅ Approve for Promotion</option>
+          <option value="revise">📝 Request Revisions</option>
+          <option value="reject">❌ Reject Application</option>
+        </select>
 
-        <div className="info-section">
-          <p className="label">Decision</p>
-          <div className={`decision-pill ${getDecisionClass()}`}>
-            {decision || 'N/A'}
-          </div>
-        </div>
+        <label>Committee Comments (Optional):</label>
+        <textarea
+          value={committeeComments}
+          onChange={(e) => setCommitteeComments(e.target.value)}
+          placeholder="Add any additional comments..."
+          rows={5}
+        />
 
-        <div className="info-section">
-          <p className="label">Comments</p>
-          <div className="comments-box">
-            {comments || 'No additional comments provided'}
-          </div>
-        </div>
-      </div>
-
-      <div className="submit-footer">
-        <button onClick={() => navigate(-1)} className="cancel-btn">Back</button>
-        <button onClick={handleConfirm} className="confirm-btn">
-          Confirm Submission →
-        </button>
-      </div>
+        <button type="submit" className="submit-btn">Submit Decision</button>
+      </form>
     </div>
   );
 };

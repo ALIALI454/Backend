@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext'; // Hakikisha path ni sahihi
+import { useAuth } from '../context/AuthContext';
 import { FaUser, FaEnvelope, FaLock, FaBriefcase, FaBuilding, FaSignInAlt } from 'react-icons/fa';
-import suzaLogo from '../assets/suza-logo.jpeg'; // Hakikisha path ni sahihi
-import './Register.css'; // Hii ni muhimu sana kwa CSS mpya!
+import suzaLogo from '../assets/suza-logo.jpeg'; // Make sure the path is correct
+import './Register.css';
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -16,7 +16,7 @@ const Register = () => {
 
   const [error, setError] = useState('');
   const navigate = useNavigate();
-  const { register } = useAuth(); // Hakikisha useAuth context inafanya kazi
+  const { register } = useAuth();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -30,42 +30,42 @@ const Register = () => {
     e.preventDefault();
 
     if (!formData.email || !formData.password) {
-      setError('Tafadhali jaza barua pepe na neno la siri.');
+      setError('Please enter both email and password.');
       return;
     }
 
     if (formData.password.length < 6) {
-      setError('Neno la siri lazima liwe angalau herufi 6.');
+      setError('Password must be at least 6 characters long.');
       return;
     }
 
     if (formData.role === 'applicant' && (!formData.position || !formData.department)) {
-      setError('Tafadhali jaza nafasi yako ya sasa na idara.');
+      setError('Please enter your current position and department.');
       return;
     }
 
-    // Simulate registration
-    register(formData); // Hii inapaswa kuunganishwa na backend halisi
-    navigate('/login'); // Redirect to login after successful registration
+    // Simulate registration (connect to real backend in production)
+    register(formData);
+    navigate('/login');
   };
 
   return (
-    <div className="register-wrapper"> {/* Kifunga kikuu cha ukurasa mzima */}
-      <div className="register-container"> {/* Container kuu ya fomu */}
-        <div className="logo-section"> {/* Sehemu ya logo */}
+    <div className="register-wrapper">
+      <div className="register-container">
+        <div className="logo-section">
           <img src={suzaLogo} alt="SUZA Logo" className="suza-logo" />
         </div>
 
-        <div className="register-header"> {/* Sehemu ya vichwa vya habari */}
+        <div className="register-header">
           <h1 className="system-title">SUZA PROMOTION GUIDELINE SYSTEM</h1>
           <h2 className="page-title">
             <FaSignInAlt className="icon-mr" />
-            Jisajili Akaunti Yako
+            Create Your Account
           </h2>
         </div>
 
         {error && (
-          <div className="error-message show-error"> {/* Ujumbe wa makosa */}
+          <div className="error-message show-error">
             {error}
           </div>
         )}
@@ -74,7 +74,7 @@ const Register = () => {
           {/* Role */}
           <div className="form-group">
             <label htmlFor="role" className="form-label">
-              <FaUser className="icon-mr" /> Nafasi
+              <FaUser className="icon-mr" /> Select Role
             </label>
             <select
               id="role"
@@ -84,17 +84,17 @@ const Register = () => {
               required
               className="register-select"
             >
-              <option value="applicant">Mwombaji</option>
-              <option value="university-community">Jumuiya ya Chuo Kikuu</option>
+              <option value="applicant">Applicant</option>
+              <option value="university-community">University Community</option>
             </select>
           </div>
 
-          {/* Conditional fields for applicant */}
+          {/* Applicant-specific fields */}
           {formData.role === 'applicant' && (
             <>
               <div className="form-group">
                 <label htmlFor="position" className="form-label">
-                  <FaBriefcase className="icon-mr" /> Nafasi ya Sasa
+                  <FaBriefcase className="icon-mr" /> Current Position
                 </label>
                 <input
                   type="text"
@@ -102,7 +102,7 @@ const Register = () => {
                   name="position"
                   value={formData.position}
                   onChange={handleChange}
-                  placeholder="Ingiza nafasi yako ya sasa"
+                  placeholder="Enter your current position"
                   required
                   className="register-input"
                 />
@@ -110,7 +110,7 @@ const Register = () => {
 
               <div className="form-group">
                 <label htmlFor="department" className="form-label">
-                  <FaBuilding className="icon-mr" /> Idara
+                  <FaBuilding className="icon-mr" /> Department
                 </label>
                 <select
                   id="department"
@@ -120,12 +120,12 @@ const Register = () => {
                   required
                   className="register-select"
                 >
-                  <option value="">Chagua Idara</option>
-                  <option value="science">Sayansi</option>
-                  <option value="computing">Teknolojia ya Habari</option>
-                  <option value="engineering">Uhandisi</option>
-                  <option value="business">Biashara</option>
-                  <option value="education">Elimu</option>
+                  <option value="">Select Department</option>
+                  <option value="science">Science</option>
+                  <option value="computing">Information Technology</option>
+                  <option value="engineering">Engineering</option>
+                  <option value="business">Business</option>
+                  <option value="education">Education</option>
                 </select>
               </div>
             </>
@@ -134,7 +134,7 @@ const Register = () => {
           {/* Email */}
           <div className="form-group">
             <label htmlFor="email" className="form-label">
-              <FaEnvelope className="icon-mr" /> Barua pepe
+              <FaEnvelope className="icon-mr" /> Email Address
             </label>
             <input
               type="email"
@@ -143,7 +143,7 @@ const Register = () => {
               value={formData.email}
               onChange={handleChange}
               required
-              placeholder="Ingiza barua pepe yako"
+              placeholder="Enter your email address"
               className="register-input"
             />
           </div>
@@ -151,7 +151,7 @@ const Register = () => {
           {/* Password */}
           <div className="form-group">
             <label htmlFor="password" className="form-label">
-              <FaLock className="icon-mr" /> Neno la siri
+              <FaLock className="icon-mr" /> Password
             </label>
             <input
               type="password"
@@ -160,23 +160,20 @@ const Register = () => {
               value={formData.password}
               onChange={handleChange}
               required
-              placeholder="Ingiza neno la siri (angalau herufi 6)"
+              placeholder="Enter a password (min 6 characters)"
               className="register-input"
             />
           </div>
 
-          <button
-            type="submit"
-            className="register-button"
-          >
-            Jisajili
+          <button type="submit" className="register-button">
+            Register
           </button>
         </form>
 
         <div className="register-footer">
           <p className="footer-text">
-            Tayari una akaunti?{' '}
-            <Link to="/login" className="footer-link">Ingia</Link>
+            Already have an account?{' '}
+            <Link to="/login" className="footer-link">Login</Link>
           </p>
         </div>
       </div>
@@ -185,3 +182,153 @@ const Register = () => {
 };
 
 export default Register;
+
+// import React, { useState } from 'react';
+// import { useNavigate } from 'react-router-dom';
+// import axios from 'axios';
+// import './Register.css';
+
+// const Register = () => {
+//   const [formData, setFormData] = useState({
+//     role: 'applicant',
+//     position: '',
+//     department: '',
+//     email: '',
+//     password: ''
+//   });
+
+//   const [message, setMessage] = useState('');
+//   const [error, setError] = useState('');
+//   const [loading, setLoading] = useState(false);
+//   const navigate = useNavigate(); // ✅ Add this
+
+//   const handleChange = (e) => {
+//     const { name, value } = e.target;
+//     setFormData(prev => ({ ...prev, [name]: value }));
+//   };
+
+//   const validateEmail = (email) => {
+//     const pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+//     return pattern.test(email);
+//   };
+
+//   const handleSubmit = async (e) => {
+//     e.preventDefault();
+//     setMessage('');
+//     setError('');
+
+//     if (!validateEmail(formData.email)) {
+//       setError('Barua pepe si sahihi. Tafadhali hakiki.');
+//       return;
+//     }
+
+//     if (formData.password.length < 6) {
+//       setError('Nenosiri linapaswa kuwa na herufi 6 au zaidi.');
+//       return;
+//     }
+
+//     if (formData.role === 'applicant' && (!formData.position || !formData.department)) {
+//       setError('Wajibu kujaza "position" na "department" kwa waombaji.');
+//       return;
+//     }
+
+//     setLoading(true);
+
+//     const url = formData.role === 'applicant'
+//       ? 'http://localhost:8080/api/applicants'
+//       : 'http://localhost:8080/api/community';
+
+//     const payload = formData.role === 'applicant'
+//       ? formData
+//       : { email: formData.email, password: formData.password };
+
+//     try {
+//       await axios.post(url, payload);
+//       setMessage('✅ Usajili umefanikiwa!');
+
+//       // Clear form
+//       setFormData({
+//         role: 'applicant',
+//         position: '',
+//         department: '',
+//         email: '',
+//         password: ''
+//       });
+
+//       // 🔁 Peleka kwenye login baada ya sekunde chache
+//       setTimeout(() => {
+//         navigate('/login'); // ✅ Navigate to login page
+//       }, 1000);
+
+//     } catch (err) {
+//       console.error('Registration Error:', err);
+//       setError('❌ Usajili umeshindikana. Tafadhali hakiki taarifa zako au barua pepe inatumika tayari.');
+//     } finally {
+//       setLoading(false);
+//     }
+//   };
+
+//   return (
+//     <div className="register-container">
+//       <h2>Fomu ya Usajili</h2>
+
+//       {message && <p className="success">{message}</p>}
+//       {error && <p className="error">{error}</p>}
+
+//       <form onSubmit={handleSubmit} className="register-form">
+//         <label>Chagua Jukumu (Role):</label>
+//         <select name="role" value={formData.role} onChange={handleChange} required>
+//           <option value="applicant">Applicant</option>
+//           <option value="community">Community</option>
+//         </select>
+
+//         {formData.role === 'applicant' && (
+//           <>
+//             <label>Position:</label>
+//             <input
+//               type="text"
+//               name="position"
+//               value={formData.position}
+//               onChange={handleChange}
+//               required
+//             />
+
+//             <label>Department:</label>
+//             <input
+//               type="text"
+//               name="department"
+//               value={formData.department}
+//               onChange={handleChange}
+//               required
+//             />
+//           </>
+//         )}
+
+//         <label>Email:</label>
+//         <input
+//           type="email"
+//           name="email"
+//           value={formData.email}
+//           onChange={handleChange}
+//           required
+//         />
+
+//         <label>Password:</label>
+//         <input
+//           type="password"
+//           name="password"
+//           value={formData.password}
+//           onChange={handleChange}
+//           required
+//           minLength={6}
+//         />
+
+//         <button type="submit" disabled={loading}>
+//           {loading ? 'Inasajili...' : 'Jisajili'}
+//         </button>
+//       </form>
+//     </div>
+//   );
+// };
+
+// export default Register;

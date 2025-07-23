@@ -17,7 +17,7 @@ const AssignedApplications = () => {
         cv: true,
         certificates: true,
         publications: true,
-        teaching_portfolio: false, // This document is missing for Asha
+        teaching_portfolio: false, // Missing
       },
     },
     {
@@ -43,7 +43,35 @@ const AssignedApplications = () => {
       currentPosition: "Professor",
       documents: {
         cv: true,
-        certificates: false, // This document is missing for Jane
+        certificates: false, // Missing
+        publications: true,
+        teaching_portfolio: true,
+      },
+    },
+    {
+      id: 4,
+      name: "Dr. Salma Juma",
+      department: "Education",
+      deadline: "2025-08-10",
+      status: "Pending Review",
+      currentPosition: "Lecturer",
+      documents: {
+        cv: true,
+        certificates: true,
+        publications: false, // Missing
+        teaching_portfolio: true,
+      },
+    },
+    {
+      id: 5,
+      name: "Prof. Michael Onyango",
+      department: "Business Administration",
+      deadline: "2025-08-15",
+      status: "In Progress",
+      currentPosition: "Associate Professor",
+      documents: {
+        cv: true,
+        certificates: true,
         publications: true,
         teaching_portfolio: true,
       },
@@ -62,7 +90,7 @@ const AssignedApplications = () => {
       case "In Progress":
         return "status-progress";
       case "Completed":
-        return "status-completed"; // Add a completed status if needed
+        return "status-completed"; // Optional
       default:
         return "status-default";
     }
@@ -74,7 +102,13 @@ const AssignedApplications = () => {
         <h1>Your Assigned Applications</h1>
         <div className="current-date">
           <span>
-            📅 Current Date: {new Date().toLocaleDateString("en-US", { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
+            📅 Current Date:{" "}
+            {new Date().toLocaleDateString("en-US", {
+              weekday: "long",
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+            })}
           </span>
         </div>
       </div>
@@ -96,14 +130,16 @@ const AssignedApplications = () => {
 
               <div className="card-body">
                 <p className="current-position">
-                  **Current Position:** {app.currentPosition}
+                  Current Position: {app.currentPosition}
                 </p>
                 <h3>Submitted Documents</h3>
                 <div className="documents-list">
                   {Object.entries(app.documents).map(([doc, submitted]) => (
                     <span
                       key={doc}
-                      className={`document-tag ${submitted ? "doc-submitted" : "doc-missing"}`}
+                      className={`document-tag ${
+                        submitted ? "doc-submitted" : "doc-missing"
+                      }`}
                     >
                       {submitted ? "✅" : "❌"}{" "}
                       {doc

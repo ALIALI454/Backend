@@ -1,3 +1,4 @@
+// src/pages/university-committee/ApplicationsQueue.jsx
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './ApplicationsQueue.css';
@@ -133,8 +134,8 @@ const ApplicationsQueue = () => {
     ));
   };
 
-  const handleView = (application) => {
-    navigate('/university-committee/application-details', { state: { application } });
+  const handleView = (applicationId) => {
+    navigate(`/university-committee/application-details/${applicationId}`);
   };
 
   const getStatusClass = (status) => {
@@ -206,7 +207,7 @@ const ApplicationsQueue = () => {
                   <button className="btn save" onClick={() => handleSave(app.id)}>Save</button>
                 ) : (
                   <>
-                    <button className="btn view" onClick={() => handleView(app)}>View</button>
+                    <button className="btn view" onClick={() => handleView(app.id)}>View</button>
                     <button className="btn edit" onClick={() => handleEdit(app.id)}>Edit</button>
                   </>
                 )}

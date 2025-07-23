@@ -1,393 +1,136 @@
-/* --- UNIVERSAL STYLES & FONT IMPORTS --- */
-/* Import high-quality fonts for a modern and professional look */
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Open+Sans:wght@300;400;600&display=swap');
-
-body {
-  font-family: 'Open Sans', sans-serif; /* Default body font */
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  overflow-x: hidden; /* Prevent horizontal scroll */
-}
-
-/* --- MAIN CONTAINER BACKGROUND --- */
-.main-container {
-  /* Using a more vibrant and smooth gradient */
-  background: linear-gradient(145deg, #a7e0f8 0%, #7dcff8 100%);
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 20px; /* Some padding for smaller screens */
-  overflow: hidden; /* Ensure gradient stays within bounds */
-
-  /* Subtle background pattern/texture for added visual interest */
-  position: relative;
-}
-
-.main-container::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-image: url('data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%239ed7f3" fill-opacity="0.2"%3E%3Cpath d="M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zm0 14v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0 14v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm-30 0v-4h-2v4H0v2h4v4h2v-4h4v-2H6zm0-14v-4h-2v4H0v2h4v4h2v-4h4v-2H6zm0-14v-4h-2v4H0v2h4v4h2V6h4V4h-4zm0-14V0h-2v4H0v2h4v4h2V6h4V4h-4z"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');
-  opacity: 0.3;
-  z-index: 0;
-}
-
-/* --- CONTENT CARD STYLING --- */
-.content-card, .error-card {
-  position: relative;
-  z-index: 1; /* Bring card above background pattern */
-  background: rgba(255, 255, 255, 0.95); /* Slightly transparent white for a modern feel */
-  border-radius: 20px; /* More rounded corners */
-  padding: 40px;
-  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(255, 255, 255, 0.5); /* Deep, soft shadow with subtle border */
-  border: 1px solid rgba(255, 255, 255, 0.7); /* Lighter, more prominent border */
-  backdrop-filter: blur(15px); /* Stronger frosted glass effect */
-  -webkit-backdrop-filter: blur(15px);
-  transform: translateY(0);
-  transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
-}
-
-.content-card:hover, .error-card:hover {
-  transform: translateY(-10px); /* More significant lift */
-  box-shadow: 0 35px 80px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(255, 255, 255, 0.8); /* Even deeper shadow */
-}
-
-/* --- ICONS & HEADINGS --- */
-.success-icon, .error-icon {
-  animation: bounceInScale 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; /* More sophisticated bounce */
-  box-shadow: 0 0 0 0 rgba(0, 0, 0, 0); /* Initial state for pulse effect */
-  background: linear-gradient(135deg, #4CAF50, #8BC34A); /* Green gradient for success */
-  color: white; /* White icon for better contrast */
-}
-
-.error-icon {
-  background: linear-gradient(135deg, #F44336, #FF9800); /* Red-orange gradient for error */
-}
-
-/* Pulse animation for icons */
-.success-icon::after, .error-icon::after {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  border-radius: 50%;
-  width: 100%;
-  height: 100%;
-  background: currentColor; /* Use the icon's color */
-  animation: pulse 1.5s infinite;
-  opacity: 0;
-  z-index: -1;
-}
-
-@keyframes pulse {
-  0% { transform: translate(-50%, -50%) scale(0.7); opacity: 0.7; }
-  100% { transform: translate(-50%, -50%) scale(1.4); opacity: 0; }
-}
-
-@keyframes bounceInScale {
-  0% { transform: scale(0.5); opacity: 0; }
-  50% { transform: scale(1.15); opacity: 1; }
-  75% { transform: scale(0.9); }
-  100% { transform: scale(1); }
-}
-
-h1 {
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 700; /* Bolder */
-  letter-spacing: -1px; /* Tighter */
-  color: #2c3e50; /* Darker, richer text */
-  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.05); /* Subtle text shadow */
-}
-
-.message-text {
-  font-family: 'Open Sans', sans-serif;
-  color: #1976d2; /* Deeper blue for message */
-  font-weight: 500;
-  text-shadow: 0 1px 2px rgba(25, 118, 210, 0.1);
-}
-
-/* --- APPLICATION SUMMARY SECTION --- */
-.summary-section {
-  border-left: 6px solid #42a5f5 !important; /* Thicker, more prominent left border */
-  background: linear-gradient(90deg, rgba(227, 242, 253, 0.8), rgba(255, 255, 255, 0.7)); /* Subtle horizontal gradient */
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08); /* Soft shadow for the section */
-  border-radius: 10px;
-  padding: 25px;
-}
-
-.summary-heading {
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 600;
-  color: #3f51b5; /* Deeper blue for heading */
-  padding-bottom: 12px;
-  border-bottom: 2px solid rgba(0, 0, 0, 0.08); /* More defined separator */
-  margin-bottom: 20px;
-}
-
-.summary-details p {
-  color: #4a4a4a; /* Slightly darker text for readability */
-  font-family: 'Open Sans', sans-serif;
-  font-size: 0.95rem;
-}
-.summary-details p.font-medium {
+.review-form {
+  max-width: 650px;
+  margin: 40px auto;
+  padding: 30px 40px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 12px 25px rgba(0,0,0,0.12);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   color: #2c3e50;
+}
+
+.review-form h2 {
+  text-align: center;
+  font-weight: 700;
+  font-size: 2rem;
+  margin-bottom: 10px;
+  color: #34495e;
+}
+
+.review-form p {
+  text-align: center;
+  font-size: 1.05rem;
+  margin-bottom: 25px;
+  color: #7f8c8d;
+  line-height: 1.5;
+}
+
+.review-form form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.review-form label,
+.review-form legend {
   font-weight: 600;
   font-size: 1rem;
+  color: #34495e;
+  margin-bottom: 6px;
 }
 
-/* --- RECOMMENDATION TAGS --- */
-.recommendation-tag {
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 600;
-  font-size: 0.95rem;
-  padding: 10px 20px; /* More padding for a bolder look */
-  border-radius: 25px; /* Fully rounded pills */
-  transition: all 0.3s ease-in-out;
-  cursor: default;
-  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-  letter-spacing: 0.5px;
-}
-
-.recommendation-tag:hover {
-  transform: scale(1.05) translateY(-3px); /* Lift and slight scale */
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
-}
-
-.tag-approve {
-  background: linear-gradient(45deg, #66bb6a, #43a047); /* Green gradient */
-  color: white;
-}
-.tag-revise {
-  background: linear-gradient(45deg, #ffee58, #ffb300); /* Yellow-orange gradient */
-  color: #5d4037; /* Dark brown text for contrast */
-}
-.tag-reject {
-  background: linear-gradient(45deg, #ef5350, #d32f2f); /* Red gradient */
-  color: white;
-}
-
-/* --- RATING STARS --- */
-.star-rating .star {
-  font-size: 32px; /* Larger stars */
-  transition: transform 0.2s ease-out, color 0.3s ease;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1); /* Soft shadow for stars */
-}
-
-.star-rating .star:hover {
-  transform: scale(1.3); /* Pop effect */
-  color: #ffeb3b !important; /* Brighter yellow */
-}
-
-.star-filled {
-  color: #ffc107 !important; /* Vibrant gold */
-}
-.star-empty {
-  color: #bdbdbd !important; /* Soft grey */
-}
-
-.rating-text {
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 500;
-  color: #424242;
-}
-
-/* --- COMMENTS BOXES --- */
-.comments-box, .confidential-comments-box {
-  background: #fdfdfe; /* Very light, almost white background */
-  border: 1px solid #e0e0e0;
-  border-radius: 12px; /* Slightly more rounded */
-  padding: 20px;
-  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.04); /* Deeper inner shadow */
-  transition: all 0.3s ease-in-out;
-  position: relative; /* For pseudo-elements */
-  overflow: hidden;
-}
-
-.comments-box:hover, .confidential-comments-box:hover {
-  border-color: #90caf9; /* Light blue border on hover */
-  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.08), 0 0 0 4px rgba(66, 165, 245, 0.1); /* Blue glow */
-}
-
-.comments-text {
-  font-family: 'Open Sans', sans-serif;
-  color: #333;
-  line-height: 1.8;
-  font-size: 0.95rem;
-}
-
-.confidential-comments-box {
-  border-left: 6px solid #ffca28 !important; /* Vibrant yellow border */
-  background: linear-gradient(90deg, rgba(255, 243, 175, 0.8), rgba(255, 255, 255, 0.7)); /* Yellowish gradient */
-}
-
-.confidential-comments-box::before {
-  content: '🔒 CONFIDENTIAL'; /* Uppercase for emphasis */
-  position: absolute;
-  top: 15px;
-  right: 15px;
-  font-size: 0.8rem;
-  font-weight: 700; /* Bolder */
-  color: #b35900; /* Darker orange-brown */
-  background: rgba(255, 255, 255, 0.7);
-  padding: 5px 10px;
+.review-form input[type="text"],
+.review-form select,
+.review-form textarea,
+.review-form input[type="file"] {
+  padding: 12px 15px;
+  border: 2px solid #d1d8e0;
   border-radius: 8px;
-  backdrop-filter: blur(5px);
-  -webkit-backdrop-filter: blur(5px);
-  opacity: 0.95;
-  z-index: 1;
-  transform: rotate(3deg); /* More tilt */
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  font-size: 1rem;
+  font-family: inherit;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  resize: vertical;
+  background-color: #fafafa;
 }
 
-.confidential-text {
-  font-style: italic; /* Italicize confidential text */
-  color: #4d4d4d;
+.review-form input[type="text"]:focus,
+.review-form select:focus,
+.review-form textarea:focus {
+  border-color: #27ae60; /* green focus */
+  box-shadow: 0 0 8px rgba(39,174,96,0.5);
+  outline: none;
 }
 
-/* --- ACTION BUTTONS --- */
-.action-buttons {
-  margin-top: 40px;
+.review-form textarea {
+  min-height: 90px;
+  font-family: inherit;
 }
 
-.primary-button, .secondary-button {
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 600;
-  letter-spacing: 0.8px; /* Slightly wider spacing */
-  text-transform: uppercase;
-  padding: 15px 30px; /* More generous padding */
-  border-radius: 10px; /* Slightly less rounded for a solid feel */
-  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); /* Stronger initial shadow */
+.review-form input[type="file"] {
+  padding: 6px 10px;
+  font-size: 0.95rem;
   cursor: pointer;
 }
 
-.primary-button {
-  background: linear-gradient(45deg, #1976d2, #2196f3); /* Blue gradient */
+.submit-btn-green {
+  margin-top: 10px;
+  padding: 15px 0;
+  background: #27ae60; /* Green */
   color: white;
+  font-weight: 700;
+  font-size: 1.2rem;
   border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  user-select: none;
 }
 
-.primary-button:hover {
-  background: linear-gradient(45deg, #1565c0, #1976d2); /* Darker blue on hover */
-  transform: translateY(-5px); /* More significant lift */
-  box-shadow: 0 12px 30px rgba(0, 123, 255, 0.4); /* Very pronounced shadow */
+.submit-btn-green:hover {
+  background-color: #1e8449;
+  box-shadow: 0 7px 18px rgba(39,174,96,0.6);
 }
 
-.secondary-button {
-  background: white;
-  color: #424242;
-  border: 2px solid #bdbdbd; /* Solid border */
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+.submit-btn-green:active {
+  transform: scale(0.97);
 }
 
-.secondary-button:hover {
-  background-color: #f0f4f7 !important; /* Lighter hover state */
-  transform: translateY(-3px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
-  border-color: #90caf9 !important; /* Blue border on hover */
-  color: #1976d2; /* Blue text on hover */
+/* Checkbox group */
+.checkbox-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
 }
 
-/* --- ERROR CARD SPECIFIC STYLES --- */
-.error-card {
-  border: 1px solid rgba(255, 99, 71, 0.7); /* Reddish border for error */
-  background: rgba(255, 240, 240, 0.95); /* Light red background */
-  box-shadow: 0 25px 60px rgba(255, 99, 71, 0.25);
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 500;
+  font-size: 1rem;
+  user-select: none;
+  cursor: pointer;
+  color: #34495e;
 }
 
-.error-card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 35px 80px rgba(255, 99, 71, 0.35);
+.checkbox-label input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
 }
 
-.error-button {
-  background: linear-gradient(45deg, #d32f2f, #ef5350); /* Red gradient for error button */
+/* Form groups */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
 }
 
-.error-button:hover {
-  background: linear-gradient(45deg, #c62828, #d32f2f);
-  box-shadow: 0 12px 30px rgba(255, 99, 71, 0.4);
-}
-
-/* --- RESPONSIVE DESIGN --- */
-@media (max-width: 768px) {
-  .content-card, .error-card {
-    padding: 30px 20px;
-    margin: 15px; /* Add margin around the card */
-    border-radius: 15px;
+@media (max-width: 640px) {
+  .review-form {
+    padding: 20px 25px;
   }
-  h1 {
-    font-size: 28px;
-    letter-spacing: -0.5px;
-  }
-  .message-text {
-    font-size: 1rem;
-  }
-  .summary-section, .comments-box, .confidential-comments-box {
-    padding: 18px;
-    border-radius: 8px;
-  }
-  .summary-heading {
-    font-size: 1.1rem;
-    margin-bottom: 15px;
-  }
-  .summary-details p {
-    font-size: 0.85rem;
-  }
-  .summary-details p.font-medium {
-    font-size: 0.95rem;
-  }
-  .recommendation-tag {
-    padding: 8px 15px;
-    font-size: 0.85rem;
-  }
-  .star-rating .star {
-    font-size: 28px;
-  }
-  .rating-text {
-    font-size: 0.9rem;
-  }
-  .comments-text, .confidential-text {
-    font-size: 0.88rem;
-    line-height: 1.7;
-  }
-  .confidential-comments-box::before {
-    font-size: 0.7rem;
-    padding: 4px 8px;
-    top: 10px;
-    right: 10px;
-  }
-  .action-buttons {
-    flex-direction: column; /* Stack buttons vertically */
-    gap: 15px; /* Space between stacked buttons */
-  }
-  .primary-button, .secondary-button {
-    width: 100%; /* Full width buttons */
-    padding: 12px 20px;
-    font-size: 0.95rem;
-    letter-spacing: 0.5px;
-  }
-}
-
-@media (max-width: 480px) {
-  h1 {
-    font-size: 24px;
-  }
-  .success-icon, .error-icon {
-    width: 70px;
-    height: 70px;
-  }
-  .success-icon svg, .error-icon svg {
-    width: 35px;
-    height: 35px;
-  }
-  .content-card, .error-card {
-    padding: 25px 15px;
+  .checkbox-group {
+    flex-direction: column;
   }
 }

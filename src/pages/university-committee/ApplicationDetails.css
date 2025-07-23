@@ -1,130 +1,343 @@
+/* src/pages/university-committee/ApplicationDetails.css */
+
+/* General Body Styles */
+body {
+    background-color: #f0f2f5; /* Light grey background for the whole page */
+    font-family: 'Inter', sans-serif; /* Modern, clean font */
+    color: #333;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+}
+
+/* Main Container */
 .details-container {
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 2rem;
-  background: linear-gradient(to bottom right, #e0f2fe, #ede9fe);
-  min-height: 100vh;
-  font-family: Arial, sans-serif;
+    max-width: 900px; /* Wider container for more content */
+    margin: 40px auto;
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 25px; /* Space between cards */
 }
 
+/* Back Button */
 .back-button {
-  padding: 10px 20px;
-  background: linear-gradient(to right, #7c3aed, #4f46e5);
-  color: white;
-  font-weight: bold;
-  border: none;
-  border-radius: 8px;
-  margin-bottom: 1.5rem;
-  cursor: pointer;
-  transition: transform 0.2s ease-in-out;
+    background-color: #6c757d; /* Muted grey for back button */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.95em;
+    font-weight: 600;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    align-self: flex-start; /* Align to the left */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
+
 .back-button:hover {
-  transform: scale(1.05);
+    background-color: #5a6268;
+    transform: translateX(-5px); /* Slight slide effect */
 }
 
+/* Card Styling */
 .card {
-  background: white;
-  border-radius: 12px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
-  padding: 1.5rem;
-  margin-bottom: 1.5rem;
-  border: 1px solid #eee;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08); /* Softer, larger shadow */
+    padding: 30px;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    border: 1px solid #e0e0e0; /* Subtle border */
 }
-.card h2,
+
+.card:hover {
+    transform: translateY(-5px); /* Lift effect on hover */
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+}
+
+.card h2 {
+    font-size: 2.2em;
+    color: #2c3e50; /* Darker heading color */
+    margin-bottom: 25px;
+    text-align: center;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+.card h2::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 0;
+    width: 80px;
+    height: 4px;
+    background-image: linear-gradient(to right, #6a11cb 0%, #2575fc 100%); /* Gradient accent */
+    border-radius: 2px;
+}
+
 .card h3 {
-  margin-bottom: 1rem;
-  color: #111827;
-  border-bottom: 1px solid #e5e7eb;
-  padding-bottom: 0.5rem;
+    font-size: 1.6em;
+    color: #34495e; /* Slightly lighter heading */
+    margin-bottom: 20px;
+    border-bottom: 2px solid #f0f2f5; /* Subtle separator */
+    padding-bottom: 10px;
 }
 
+/* Row and Column Layout */
 .row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 2rem;
+    display: flex;
+    flex-wrap: wrap; /* Allow wrapping on smaller screens */
+    gap: 20px; /* Space between columns */
+    margin-bottom: 15px;
 }
+
 .col {
-  flex: 1;
-}
-label {
-  display: block;
-  font-size: 0.875rem;
-  color: #6b7280;
-  margin-bottom: 0.3rem;
-}
-p {
-  font-size: 1rem;
-  font-weight: 500;
-  color: #111827;
+    flex: 1; /* Distribute space equally */
+    min-width: 250px; /* Minimum width before wrapping */
 }
 
+.col label {
+    display: block;
+    font-weight: 600;
+    color: #555;
+    margin-bottom: 5px;
+    font-size: 0.9em;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.col p {
+    font-size: 1.1em;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+/* Status Badges */
 .status {
-  padding: 4px 10px;
-  border-radius: 9999px;
-  font-size: 0.875rem;
-  font-weight: bold;
-  display: inline-block;
-}
-.status.pending {
-  background: #fef9c3;
-  color: #92400e;
-  border: 1px solid #fde68a;
-}
-.status.review {
-  background: #dbeafe;
-  color: #1e40af;
-  border: 1px solid #93c5fd;
-}
-.status.approved {
-  background: #d1fae5;
-  color: #065f46;
-  border: 1px solid #6ee7b7;
-}
-.status.rejected {
-  background: #fee2e2;
-  color: #991b1b;
-  border: 1px solid #fecaca;
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 20px; /* More rounded */
+    font-weight: 700;
+    font-size: 0.85em;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: white;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
+.status.pending {
+    background-color: #ffc107; /* Yellow */
+    color: #856404;
+}
+
+.status.review {
+    background-color: #17a2b8; /* Cyan */
+    color: white;
+}
+
+.status.approved {
+    background-color: #28a745; /* Green */
+    color: white;
+}
+
+.status.rejected {
+    background-color: #dc3545; /* Red */
+    color: white;
+}
+
+/* Documents and Evaluation Lists */
 .documents,
 .evaluation,
 .next-steps {
-  list-style: none;
-  padding-left: 0;
+    list-style: none; /* Remove default list bullets */
+    padding: 0;
+    margin: 0;
 }
+
 .documents li,
 .evaluation li,
 .next-steps li {
-  margin-bottom: 0.5rem;
-  color: #374151;
+    padding: 8px 0;
+    border-bottom: 1px dashed #f0f2f5; /* Dashed separator */
+    display: flex;
+    align-items: center;
+    font-size: 1em;
+    color: #444;
 }
 
+.documents li:last-child,
+.evaluation li:last-child,
+.next-steps li:last-child {
+    border-bottom: none; /* No border on last item */
+}
+
+.documents li span,
+.evaluation li span { /* For check/cross emojis */
+    margin-right: 10px;
+    font-size: 1.2em;
+}
+
+/* Evaluation Status */
 .eval-status {
-  font-weight: 600;
-  color: #111827;
-  margin-bottom: 0.5rem;
+    font-size: 1.2em;
+    font-weight: 700;
+    color: #28a745; /* Green for eligible */
+    margin-bottom: 20px;
+    text-align: center;
+    padding: 10px;
+    background-color: #e6ffe6;
+    border-radius: 8px;
+    border: 1px solid #a3e6a3;
 }
 
-.actions {
-  display: flex;
-  justify-content: flex-end;
+/* If not eligible, make it red */
+.eval-status:contains("NOT ELIGIBLE") {
+    color: #dc3545;
+    background-color: #ffe6e6;
+    border-color: #e6a3a3;
 }
+
+
+/* Reviewer Assignment Section */
+/* Assuming AssignReviewer component will have its own styles,
+   this just styles the surrounding paragraph */
+.card h3 + p { /* Styles the paragraph right after an h3 */
+    font-size: 1.1em;
+    color: #333;
+    background-color: #f8f9fa;
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid #e9ecef;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 500;
+}
+
+/* Action Buttons Card */
+.card.actions {
+    text-align: center;
+    padding: 20px 30px;
+}
+
 .confirm-button {
-  padding: 12px 24px;
-  background: linear-gradient(to right, #10b981, #059669);
-  color: white;
-  font-weight: bold;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: transform 0.2s ease-in-out;
-}
-.confirm-button:hover {
-  transform: scale(1.05);
+    background-image: linear-gradient(to right, #6a11cb 0%, #2575fc 100%); /* Gradient background */
+    color: white;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.15em;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
 }
 
-.no-data {
-  text-align: center;
-  font-size: 1.1rem;
-  color: #4b5563;
+.confirm-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    opacity: 0.95;
+}
+
+/* No Data Message */
+.card.no-data {
+    text-align: center;
+    padding: 50px;
+    font-size: 1.2em;
+    color: #777;
+    background-color: #fff3cd; /* Light yellow background */
+    border-color: #ffeeba;
+    box-shadow: 0 4px 15px rgba(255, 193, 7, 0.1);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .details-container {
+        margin: 20px;
+        padding: 15px;
+        gap: 15px;
+    }
+
+    .card {
+        padding: 20px;
+        border-radius: 10px;
+    }
+
+    .card h2 {
+        font-size: 1.8em;
+        margin-bottom: 20px;
+    }
+
+    .card h3 {
+        font-size: 1.4em;
+        margin-bottom: 15px;
+    }
+
+    .row {
+        flex-direction: column; /* Stack columns vertically */
+        gap: 10px;
+    }
+
+    .col {
+        min-width: 100%; /* Full width for columns */
+    }
+
+    .back-button,
+    .confirm-button {
+        padding: 10px 15px;
+        font-size: 0.9em;
+    }
+
+    .confirm-button {
+        width: 100%; /* Full width button */
+        justify-content: center;
+    }
+
+    .status {
+        padding: 4px 10px;
+        font-size: 0.8em;
+    }
+
+    .documents li,
+    .evaluation li,
+    .next-steps li {
+        font-size: 0.95em;
+    }
+
+    .profile-image-preview,
+    .no-image-placeholder {
+        width: 100px;
+        height: 100px;
+    }
+}
+
+@media (max-width: 480px) {
+    .details-container {
+        margin: 10px;
+        padding: 10px;
+    }
+
+    .card {
+        padding: 15px;
+        border-radius: 8px;
+    }
+
+    .card h2 {
+        font-size: 1.5em;
+    }
+
+    .card h3 {
+        font-size: 1.2em;
+    }
+
+    .confirm-button {
+        font-size: 1em;
+        padding: 12px 20px;
+    }
 }
