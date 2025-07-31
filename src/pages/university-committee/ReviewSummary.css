@@ -1,171 +1,128 @@
+/* src/pages/university-committee/ReviewSummary.css */
+
 .review-summary-container {
   padding: 30px;
-  background-color: #f8f9fa; /* Light background for the page */
-  min-height: calc(100vh - 60px); /* Adjust based on your header/footer height */
-  font-family: 'Arial', sans-serif;
-  color: #333;
+  background: #f8f9fc;
+  min-height: 100vh;
 }
 
 .review-summary-container h2 {
-  text-align: center;
-  color: #2c3e50; /* Dark blue for heading */
-  margin-bottom: 40px;
-  font-size: 2.2em;
+  font-size: 24px;
   font-weight: 600;
-  border-bottom: 3px solid #007bff; /* Blue underline */
-  display: inline-block;
-  padding-bottom: 10px;
-  margin-left: auto;
-  margin-right: auto;
-  width: fit-content;
-}
-
-.review-summary-container > p { /* For "No reviews submitted yet." */
-  text-align: center;
-  font-size: 1.2em;
-  color: #666;
-  margin-top: 50px;
+  margin-bottom: 25px;
+  color: #2c3e50;
 }
 
 .review-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); /* Adjusted min-width for new section */
-  gap: 30px; /* Space between cards */
-  max-width: 1200px; /* Max width for the grid */
-  margin: 0 auto; /* Center the grid */
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 20px;
 }
 
 .review-card {
-  background-color: #ffffff;
-  border: 1px solid #e0e0e0;
+  background: #fff;
+  border: 1px solid #e1e5ee;
   border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  padding: 25px;
-  display: flex;
-  flex-direction: column;
-  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  padding: 20px;
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.06);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .review-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+  transform: scale(1.02);
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.12);
 }
 
 .review-card h3 {
-  color: #007bff; /* Blue for application ID */
-  margin-top: 0;
-  margin-bottom: 15px;
-  font-size: 1.4em;
-  border-bottom: 2px solid #e9ecef;
-  padding-bottom: 10px;
+  font-size: 20px;
+  margin-bottom: 10px;
+  color: #34495e;
 }
 
 .review-card p {
-  margin-bottom: 10px;
-  line-height: 1.6;
-  font-size: 0.95em;
+  margin: 6px 0;
+  color: #555;
+  font-size: 14px;
 }
 
-.review-card p strong {
-  color: #495057; /* Slightly darker for bold labels */
-  margin-right: 5px;
+.review-card strong {
+  color: #2c3e50;
 }
 
 .recommendation-tag {
-  padding: 8px 15px;
-  border-radius: 5px;
-  font-weight: bold;
-  text-align: center;
-  margin: 15px 0;
-  font-size: 1em;
-  display: inline-block; /* Make it fit content */
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+  margin: 8px 0;
+  text-transform: uppercase;
 }
 
-/* Specific colors for recommendation tags */
 .recommendation-tag.approve {
-  background-color: #d4edda; /* Light green */
-  color: #155724; /* Dark green text */
-  border: 1px solid #c3e6cb;
+  background: #e0f7e9;
+  color: #27ae60;
 }
 
 .recommendation-tag.revise {
-  background-color: #fff3cd; /* Light yellow */
-  color: #856404; /* Dark yellow text */
-  border: 1px solid #ffeeba;
+  background: #fff6e5;
+  color: #e67e22;
 }
 
 .recommendation-tag.reject {
-  background-color: #f8d7da; /* Light red */
-  color: #721c24; /* Dark red text */
-  border: 1px solid #f5c6cb;
+  background: #fdecea;
+  color: #c0392b;
 }
 
-.review-card .submitted-at {
-  margin-top: auto; /* Push to bottom of card */
-  font-size: 0.85em;
-  color: #777;
-  text-align: right;
-  padding-top: 15px;
-  border-top: 1px dashed #eee;
+.submitted-at {
+  font-size: 12px;
+  color: #888;
+  margin-top: 10px;
+  font-style: italic;
 }
 
-/* --- Committee Decision Section Styling --- */
-.decision-section {
-  border-top: 1px solid #e0e0e0;
-  padding-top: 20px;
+/* Committee Recommendation Section */
+.recommendation-section {
   margin-top: 20px;
-  background-color: #fcfcfc; /* Slightly different background for distinction */
-  border-radius: 0 0 10px 10px; /* Round bottom corners if card has them */
-  padding-bottom: 0; /* Remove padding if it adds extra space */
+  border-top: 1px solid #ececec;
+  padding-top: 15px;
 }
 
-.decision-section h4 {
-  color: #34495e; /* Darker blue for committee decision heading */
-  margin-bottom: 15px;
-  font-size: 1.15em;
+.recommendation-section h4 {
+  font-size: 16px;
   font-weight: 600;
+  margin-bottom: 10px;
+  color: #2c3e50;
 }
 
-.decision-section select,
-.decision-section textarea {
-  width: calc(100% - 20px); /* Account for padding */
+.recommendation-section select,
+.recommendation-section textarea {
+  width: 100%;
   padding: 10px;
-  margin-bottom: 15px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  font-size: 0.95em;
-  box-sizing: border-box; /* Include padding in width */
-  transition: border-color 0.3s ease;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 14px;
+  margin-bottom: 12px;
+  background: #fafafa;
 }
 
-.decision-section select:focus,
-.decision-section textarea:focus {
-  border-color: #007bff;
-  outline: none;
-  box-shadow: 0 0 5px rgba(0, 123, 255, 0.25);
-}
-
-.decision-section textarea {
-  min-height: 80px; /* Reasonable height for reason */
-  resize: vertical; /* Allow vertical resizing */
+.recommendation-section textarea {
+  resize: vertical;
+  min-height: 70px;
 }
 
 .submit-decision-btn {
-  display: block;
-  width: 100%;
-  padding: 12px;
-  background-color: #17a2b8; /* Info blue for decision button */
+  background: #2c7be5;
   color: white;
+  padding: 10px 15px;
   border: none;
-  border-radius: 5px;
-  font-size: 1em;
-  font-weight: bold;
+  border-radius: 6px;
   cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-  margin-top: 10px; /* Space above button */
+  font-weight: 600;
+  font-size: 14px;
+  transition: background 0.3s ease;
 }
 
 .submit-decision-btn:hover {
-  background-color: #138496; /* Darker blue on hover */
-  transform: translateY(-2px);
+  background: #1a5bb8;
 }

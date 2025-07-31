@@ -1,53 +1,112 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext';
-import { FaUser, FaEnvelope, FaLock, FaBriefcase, FaBuilding, FaSignInAlt } from 'react-icons/fa';
-import suzaLogo from '../assets/suza-logo.jpeg'; // Make sure the path is correct
+import { 
+  FaUser, FaEnvelope, FaLock, FaBriefcase, FaBuilding, 
+  FaTransgender, FaPhone, FaCalendar, FaGraduationCap, FaSignInAlt 
+} from 'react-icons/fa';
+import suzaLogo from '../assets/suza-logo.jpeg';
 import './Register.css';
 
 const Register = () => {
   const [formData, setFormData] = useState({
-    role: 'applicant',
-    position: '',
-    department: '',
+    fullName: '',
+    username: '',
     email: '',
-    password: ''
+    password: '',
+    phoneNumber: '',
+    role:'APPLICANT',
+    position: '',
+    gender: '',
+    academicRank: '',
+    dateOfBirth: '',
+    sId: '',  // school id as string, will parse before submit
   });
 
+  const [schools, setSchools] = useState([]);
   const [error, setError] = useState('');
   const navigate = useNavigate();
-  const { register } = useAuth();
 
+  // Fetch schools on component mount
+  useEffect(() => {
+    const fetchSchools = async () => {
+      try {
+        const res = await fetch('http://localhost:8080/api/schools');
+        if (!res.ok) throw new Error('Failed to load schools');
+        const data = await res.json();
+        setSchools(data);
+      } catch (err) {
+        console.error('Error fetching schools:', err);
+        setError('Failed to load schools. Please try again later.');
+      }
+    };
+    fetchSchools();
+  }, []);
+
+  // Update form data on input change
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }));
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  setError('');
 
-    if (!formData.email || !formData.password) {
-      setError('Please enter both email and password.');
-      return;
+  if (!formData.sId) {
+    setError('Please select a school.');
+    return;
+  }
+
+  const sIdInt = parseInt(formData.sId, 10);
+  if (isNaN(sIdInt)) {
+    setError('Invalid school selected.');
+    return;
+  }
+
+  // Construct nested payload as backend expects
+ const payload = {
+  school: { sId: sIdInt },
+  user: {
+    fullName: formData.fullName,
+    username: formData.username || formData.email.split('@')[0],
+    email: formData.email,
+    password: formData.password,
+    phoneNumber: formData.phoneNumber,
+    position: formData.position,
+    gender: formData.gender,
+    dateOfBirth: formData.dateOfBirth,
+    academicRank: formData.academicRank,
+    role: "APPLICANT" // <-- use the value directly
+  }
+};
+
+
+  console.log('Payload before sending:', payload);
+
+  try {
+    const res = await fetch('http://localhost:8080/api/applicants', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    });
+
+    if (!res.ok) {
+      const msg = await res.text();
+      throw new Error(msg || 'Failed to register');
     }
 
-    if (formData.password.length < 6) {
-      setError('Password must be at least 6 characters long.');
-      return;
-    }
-
-    if (formData.role === 'applicant' && (!formData.position || !formData.department)) {
-      setError('Please enter your current position and department.');
-      return;
-    }
-
-    // Simulate registration (connect to real backend in production)
-    register(formData);
     navigate('/login');
-  };
+  } catch (err) {
+    setError(err.message);
+  }
+};
+
+
+
+   
 
   return (
     <div className="register-wrapper">
@@ -60,81 +119,93 @@ const Register = () => {
           <h1 className="system-title">SUZA PROMOTION GUIDELINE SYSTEM</h1>
           <h2 className="page-title">
             <FaSignInAlt className="icon-mr" />
-            Create Your Account
+            Applicant Registration
           </h2>
         </div>
 
-        {error && (
-          <div className="error-message show-error">
-            {error}
-          </div>
-        )}
+        {error && <div className="error-message show-error">{error}</div>}
 
         <form onSubmit={handleSubmit} className="register-form">
-          {/* Role */}
+          {/* Full Name */}
           <div className="form-group">
-            <label htmlFor="role" className="form-label">
-              <FaUser className="icon-mr" /> Select Role
+            <label htmlFor="fullName" className="form-label">
+              <FaUser className="icon-mr" /> Full Name
             </label>
-            <select
-              id="role"
-              name="role"
-              value={formData.role}
+            <input
+              type="text"
+              id="fullName"
+              name="fullName"
+              value={formData.fullName}
               onChange={handleChange}
               required
-              className="register-select"
-            >
-              <option value="applicant">Applicant</option>
-              <option value="university-community">University Community</option>
-            </select>
+              placeholder="Enter your full name"
+              className="register-input"
+            />
           </div>
 
-          {/* Applicant-specific fields */}
-          {formData.role === 'applicant' && (
-            <>
-              <div className="form-group">
-                <label htmlFor="position" className="form-label">
-                  <FaBriefcase className="icon-mr" /> Current Position
-                </label>
-                <input
-                  type="text"
-                  id="position"
-                  name="position"
-                  value={formData.position}
-                  onChange={handleChange}
-                  placeholder="Enter your current position"
-                  required
-                  className="register-input"
-                />
-              </div>
+          {/* Username */}
+          <div className="form-group">
+            <label htmlFor="username" className="form-label">
+              <FaUser className="icon-mr" /> Username
+            </label>
+            <input
+              type="text"
+              id="username"
+              name="username"
+              value={formData.username}
+              onChange={handleChange}
+              placeholder="Enter username (optional)"
+              className="register-input"
+            />
+          </div>
 
-              <div className="form-group">
-                <label htmlFor="department" className="form-label">
-                  <FaBuilding className="icon-mr" /> Department
-                </label>
-                <select
-                  id="department"
-                  name="department"
-                  value={formData.department}
-                  onChange={handleChange}
-                  required
-                  className="register-select"
-                >
-                  <option value="">Select Department</option>
-                  <option value="science">Science</option>
-                  <option value="computing">Information Technology</option>
-                  <option value="engineering">Engineering</option>
-                  <option value="business">Business</option>
-                  <option value="education">Education</option>
-                </select>
-              </div>
-            </>
-          )}
+          {/* Position */}
+          <div className="form-group">
+            <label htmlFor="position" className="form-label">
+              <FaBriefcase className="icon-mr" /> Current Position
+            </label>
+            <input
+              type="text"
+              id="position"
+              name="position"
+              value={formData.position}
+              onChange={handleChange}
+              required
+              placeholder="Enter your current position"
+              className="register-input"
+            />
+          </div>
+
+          {/* School Dropdown */}
+          <div className="form-group">
+            <label htmlFor="sId" className="form-label">
+              <FaBuilding className="icon-mr" /> Select School
+            </label>
+         <select
+  id="sId"
+  name="sId"
+  value={formData.sId}
+  onChange={handleChange}
+  required
+  className="register-select"
+>
+  <option value="">-- Select School --</option>
+  
+    {schools.map((school) => (
+  <option key={school.sId} value={school.sId}>
+    {school.sName}
+  </option>
+))}
+
+ 
+</select>
+
+          </div>
 
           {/* Email */}
           <div className="form-group">
             <label htmlFor="email" className="form-label">
-              <FaEnvelope className="icon-mr" /> Email Address
+              <FaEnvelope className="icon-mr" /> Email
             </label>
             <input
               type="email"
@@ -143,7 +214,7 @@ const Register = () => {
               value={formData.email}
               onChange={handleChange}
               required
-              placeholder="Enter your email address"
+              placeholder="Enter your email"
               className="register-input"
             />
           </div>
@@ -160,7 +231,72 @@ const Register = () => {
               value={formData.password}
               onChange={handleChange}
               required
-              placeholder="Enter a password (min 6 characters)"
+              placeholder="Enter password (min 6 characters)"
+              className="register-input"
+            />
+          </div>
+
+          {/* Phone Number */}
+          <div className="form-group">
+            <label htmlFor="phoneNumber" className="form-label">
+              <FaPhone className="icon-mr" /> Phone Number
+            </label>
+            <input
+              type="text"
+              id="phoneNumber"
+              name="phoneNumber"
+              value={formData.phoneNumber}
+              onChange={handleChange}
+              placeholder="Enter phone number"
+              className="register-input"
+            />
+          </div>
+
+          {/* Gender */}
+          <div className="form-group">
+            <label htmlFor="gender" className="form-label">
+              <FaTransgender className="icon-mr" /> Gender
+            </label>
+            <select
+              id="gender"
+              name="gender"
+              value={formData.gender}
+              onChange={handleChange}
+              className="register-select"
+            >
+              <option value="">-- Select Gender --</option>
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+            </select>
+          </div>
+
+          {/* Academic Rank */}
+          <div className="form-group">
+            <label htmlFor="academicRank" className="form-label">
+              <FaGraduationCap className="icon-mr" /> Academic Rank
+            </label>
+            <input
+              type="text"
+              id="academicRank"
+              name="academicRank"
+              value={formData.academicRank}
+              onChange={handleChange}
+              placeholder="Enter academic rank"
+              className="register-input"
+            />
+          </div>
+
+          {/* Date of Birth */}
+          <div className="form-group">
+            <label htmlFor="dateOfBirth" className="form-label">
+              <FaCalendar className="icon-mr" /> Date of Birth
+            </label>
+            <input
+              type="date"
+              id="dateOfBirth"
+              name="dateOfBirth"
+              value={formData.dateOfBirth}
+              onChange={handleChange}
               className="register-input"
             />
           </div>
@@ -171,9 +307,8 @@ const Register = () => {
         </form>
 
         <div className="register-footer">
-          <p className="footer-text">
-            Already have an account?{' '}
-            <Link to="/login" className="footer-link">Login</Link>
+          <p>
+            Already have an account? <Link to="/login">Login</Link>
           </p>
         </div>
       </div>
@@ -182,153 +317,3 @@ const Register = () => {
 };
 
 export default Register;
-
-// import React, { useState } from 'react';
-// import { useNavigate } from 'react-router-dom';
-// import axios from 'axios';
-// import './Register.css';
-
-// const Register = () => {
-//   const [formData, setFormData] = useState({
-//     role: 'applicant',
-//     position: '',
-//     department: '',
-//     email: '',
-//     password: ''
-//   });
-
-//   const [message, setMessage] = useState('');
-//   const [error, setError] = useState('');
-//   const [loading, setLoading] = useState(false);
-//   const navigate = useNavigate(); // ✅ Add this
-
-//   const handleChange = (e) => {
-//     const { name, value } = e.target;
-//     setFormData(prev => ({ ...prev, [name]: value }));
-//   };
-
-//   const validateEmail = (email) => {
-//     const pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-//     return pattern.test(email);
-//   };
-
-//   const handleSubmit = async (e) => {
-//     e.preventDefault();
-//     setMessage('');
-//     setError('');
-
-//     if (!validateEmail(formData.email)) {
-//       setError('Barua pepe si sahihi. Tafadhali hakiki.');
-//       return;
-//     }
-
-//     if (formData.password.length < 6) {
-//       setError('Nenosiri linapaswa kuwa na herufi 6 au zaidi.');
-//       return;
-//     }
-
-//     if (formData.role === 'applicant' && (!formData.position || !formData.department)) {
-//       setError('Wajibu kujaza "position" na "department" kwa waombaji.');
-//       return;
-//     }
-
-//     setLoading(true);
-
-//     const url = formData.role === 'applicant'
-//       ? 'http://localhost:8080/api/applicants'
-//       : 'http://localhost:8080/api/community';
-
-//     const payload = formData.role === 'applicant'
-//       ? formData
-//       : { email: formData.email, password: formData.password };
-
-//     try {
-//       await axios.post(url, payload);
-//       setMessage('✅ Usajili umefanikiwa!');
-
-//       // Clear form
-//       setFormData({
-//         role: 'applicant',
-//         position: '',
-//         department: '',
-//         email: '',
-//         password: ''
-//       });
-
-//       // 🔁 Peleka kwenye login baada ya sekunde chache
-//       setTimeout(() => {
-//         navigate('/login'); // ✅ Navigate to login page
-//       }, 1000);
-
-//     } catch (err) {
-//       console.error('Registration Error:', err);
-//       setError('❌ Usajili umeshindikana. Tafadhali hakiki taarifa zako au barua pepe inatumika tayari.');
-//     } finally {
-//       setLoading(false);
-//     }
-//   };
-
-//   return (
-//     <div className="register-container">
-//       <h2>Fomu ya Usajili</h2>
-
-//       {message && <p className="success">{message}</p>}
-//       {error && <p className="error">{error}</p>}
-
-//       <form onSubmit={handleSubmit} className="register-form">
-//         <label>Chagua Jukumu (Role):</label>
-//         <select name="role" value={formData.role} onChange={handleChange} required>
-//           <option value="applicant">Applicant</option>
-//           <option value="community">Community</option>
-//         </select>
-
-//         {formData.role === 'applicant' && (
-//           <>
-//             <label>Position:</label>
-//             <input
-//               type="text"
-//               name="position"
-//               value={formData.position}
-//               onChange={handleChange}
-//               required
-//             />
-
-//             <label>Department:</label>
-//             <input
-//               type="text"
-//               name="department"
-//               value={formData.department}
-//               onChange={handleChange}
-//               required
-//             />
-//           </>
-//         )}
-
-//         <label>Email:</label>
-//         <input
-//           type="email"
-//           name="email"
-//           value={formData.email}
-//           onChange={handleChange}
-//           required
-//         />
-
-//         <label>Password:</label>
-//         <input
-//           type="password"
-//           name="password"
-//           value={formData.password}
-//           onChange={handleChange}
-//           required
-//           minLength={6}
-//         />
-
-//         <button type="submit" disabled={loading}>
-//           {loading ? 'Inasajili...' : 'Jisajili'}
-//         </button>
-//       </form>
-//     </div>
-//   );
-// };
-
-// export default Register;

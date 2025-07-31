@@ -23,22 +23,37 @@ const Login = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = async (e) => {
+  e.preventDefault();
 
-    if (!credentials.email || !credentials.password) {
-      setError('Please fill in all fields.');
+  if (!credentials.email || !credentials.password) {
+    setError('Please fill in all fields.');
+    return;
+  }
+
+  try {
+    // Call backend login
+    const response = await fetch('http://localhost:8080/api/users/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        username: credentials.email, // login with username
+        password: credentials.password
+      }),
+    });
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      setError(errorText || 'Invalid credentials');
       return;
     }
 
-    if (credentials.password.length < 6) {
-      setError('Password must be at least 6 characters.');
-      return;
-    }
+    const data = await response.json();
+    // Save userId and schoolId in localStorage
+    localStorage.setItem('userId', data.userId);
+    localStorage.setItem('schoolId', data.schoolId || '');
 
-    // Simulated login (badilisha na backend logic)
-    login({ email: credentials.email, role: credentials.role });
-
+    // Decide redirect path based on role returned from backend
     const redirectPaths = {
       applicant: '/applicant/criteria',
       'university-community': '/university-community/dashboard',
@@ -47,11 +62,21 @@ const Login = () => {
       reviewer: '/reviewer/applications',
       'hr-board': '/hr-board/dashboard',
       'university-council': '/university-council/dashboard',
+      admin: '/admin',
     };
 
-    const redirectPath = redirectPaths[credentials.role] || '/unauthorized';
+    const redirectPath = redirectPaths[data.role.toLowerCase()] || '/unauthorized';
+
+    // optional: useAuth context to set user
+    login({ email: credentials.email, role: data.role });
+
     navigate(redirectPath);
-  };
+  } catch (err) {
+    console.error(err);
+    setError('An error occurred. Please try again later.');
+  }
+};
+
 
   return (
     <div className="login-wrapper">
@@ -72,7 +97,7 @@ const Login = () => {
 
         <form onSubmit={handleSubmit} className="login-form">
 
-          {/* Hii imeletwa juu */}
+          {/* Role */}
           <div className="form-group">
             <label htmlFor="role" className="form-label">
               <FaUser className="icon-mr" />
@@ -93,6 +118,7 @@ const Login = () => {
               <option value="hr-board">HR Board</option>
               <option value="university-council">University Council</option>
               <option value="university-community">University Community</option>
+              <option value="admin">Admin</option> {/* <-- ADDED Admin */}
             </select>
           </div>
 

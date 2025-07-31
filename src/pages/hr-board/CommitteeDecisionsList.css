@@ -1,0 +1,95 @@
+.committee-decisions-list {
+  max-width: 1100px;
+  margin: 40px auto;
+  padding: 20px;
+  font-family: "Segoe UI", Arial, sans-serif;
+}
+
+.committee-decisions-list h2 {
+  font-size: 26px;
+  font-weight: 700;
+  margin-bottom: 25px;
+  text-align: center;
+  color: #2c3e50;
+}
+
+.decision-card {
+  background: #fff;
+  border: 1px solid #e0e6ed;
+  border-radius: 12px;
+  padding: 20px 25px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.decision-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+.decision-card h3 {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 15px;
+  color: #34495e;
+}
+
+.decision-card p {
+  margin: 6px 0;
+  font-size: 15px;
+  color: #555;
+}
+
+.decision-card h4 {
+  margin-top: 15px;
+  font-size: 17px;
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+.committee-decision {
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 14px;
+  display: inline-block;
+}
+
+.committee-decision.approved {
+  background-color: #e8f9f0;
+  color: #27ae60;
+  border: 1px solid #27ae60;
+}
+
+.committee-decision.rejected {
+  background-color: #fdecea;
+  color: #e74c3c;
+  border: 1px solid #e74c3c;
+}
+
+.committee-decision.pending {
+  background-color: #fef7e0;
+  color: #f39c12;
+  border: 1px solid #f39c12;
+}
+
+/* Button */
+.make-decision-btn {
+  display: inline-block;
+  margin-top: 15px;
+  padding: 10px 18px;
+  font-size: 15px;
+  background: #3498db;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.make-decision-btn:hover {
+  background: #2980b9;
+  transform: scale(1.03);
+}

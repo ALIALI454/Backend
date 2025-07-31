@@ -4,7 +4,7 @@ import Logo from './Logo';
 const Header = () => {
   return (
     <header style={{
-      backgroundColor: '#2c3e50',
+      backgroundColor: '#121113ff',
       color: 'white',
       padding: '10px 0',
       boxShadow: '0 2px 5px rgba(0,0,0,0.1)'

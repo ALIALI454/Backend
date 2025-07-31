@@ -1,0 +1,47 @@
+.hr-decisions-list {
+  max-width: 900px;
+  margin: 30px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  font-family: Arial, sans-serif;
+}
+
+.hr-decisions-list h2 {
+  margin-bottom: 25px;
+  font-weight: 700;
+  font-size: 28px;
+  color: #2c3e50;
+}
+
+.decision-card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 18px 20px;
+  margin-bottom: 20px;
+  background-color: #f9f9f9;
+  transition: box-shadow 0.3s ease;
+}
+
+.decision-card:hover {
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.decision-card h3 {
+  margin-top: 0;
+  margin-bottom: 12px;
+  color: #34495e;
+}
+
+.decision-card p {
+  margin: 6px 0;
+  color: #555;
+  font-size: 15px;
+}
+
+hr {
+  border: none;
+  border-top: 1px solid #ccc;
+  margin: 15px 0;
+}

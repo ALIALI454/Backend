@@ -1,6 +1,8 @@
+
+
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './ApplicationForm.css'; // Hii ni muhimu sana kwa CSS mpya!
+import './ApplicationForm.css'; // CSS ya form
 
 const positionCategories = [
   {
@@ -15,25 +17,6 @@ const positionCategories = [
       "Tutorial Assistants"
     ]
   },
-  {
-    title: "Library Staff",
-    positions: [
-      "Library Professors",
-      "Associate Library Professors",
-      "Senior Librarians",
-      "Assistant Librarians"
-    ]
-  },
-  {
-    title: "Research Staff",
-    positions: [
-      "Research Professors",
-      "Associate Research Professors",
-      "Senior Research Fellows",
-      "Research Fellows",
-      "Assistant Research Fellows"
-    ]
-  }
 ];
 
 const ApplicationForm = () => {
@@ -50,6 +33,8 @@ const ApplicationForm = () => {
     newPublications: false
   });
 
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -60,18 +45,49 @@ const ApplicationForm = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log('Form submitted:', formData);
-    navigate('/applicant/upload');
-  };
+ const handleSubmit = async (e) => {
+  e.preventDefault();
+  setLoading(true);
+  setError('');
+
+  try {
+    const response = await fetch('http://localhost:8080/api/applications/post', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(formData)
+    });
+
+    if (response.ok) {
+      const savedData = await response.json();
+      console.log("Form saved:", savedData);
+
+      // Hifadhi applicationId hapa
+      localStorage.setItem('applicationId', savedData.id);
+
+      alert("Application submitted successfully!");
+      navigate('/applicant/upload'); // endelea kwenye upload documents
+    } else {
+      const errorText = await response.text();
+      console.error("Error:", errorText);
+      setError("Failed to submit application: " + errorText);
+    }
+  } catch (err) {
+    console.error("Error submitting application:", err);
+    setError("Something went wrong. Try again.");
+  } finally {
+    setLoading(false);
+  }
+};
 
   return (
-    <div className="form-container-wrapper"> {/* Kifunga kikuu cha ukurasa mzima */}
-      <div className="application-form-container"> {/* Container kuu ya fomu */}
+    <div className="form-container-wrapper">
+      <div className="application-form-container">
         <h2 className="form-main-title">
-         Academic Staff Promotion Guideline Application Form
+          Academic Staff Promotion Guideline Application Form
         </h2>
+        {error && <p className="error-message">{error}</p>}
         <form onSubmit={handleSubmit} className="application-form">
           <h3 className="form-section-title">PART 1: PERSONAL PARTICULARS</h3>
 
@@ -197,7 +213,6 @@ const ApplicationForm = () => {
                 checked={formData.appliedBefore}
                 onChange={handleChange}
               />
-              <span className="checkbox-custom"></span> {/* Custom checkbox visual */}
             </label>
           </div>
 
@@ -224,13 +239,12 @@ const ApplicationForm = () => {
                 checked={formData.newPublications}
                 onChange={handleChange}
               />
-              <span className="checkbox-custom"></span> {/* Custom checkbox visual */}
             </label>
           </div>
 
           <div className="form-submit-container">
-            <button type="submit" className="submit-button">
-              Submit Application
+            <button type="submit" className="submit-button" disabled={loading}>
+              {loading ? "Submitting..." : "Submit Application"}
             </button>
           </div>
         </form>

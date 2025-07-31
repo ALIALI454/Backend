@@ -4,7 +4,7 @@ import './ReviewSummary.css';
 
 const ReviewSummary = () => {
   const [reviews, setReviews] = useState([]);
-  const [decisions, setDecisions] = useState({}); // store committee decisions
+  const [recommendations, setRecommendations] = useState({}); // store committee recommendations
 
   useEffect(() => {
     let storedReviews = JSON.parse(localStorage.getItem('submittedReviews')) || [];
@@ -50,26 +50,26 @@ const ReviewSummary = () => {
     setReviews(storedReviews);
   }, []);
 
-  // Handle decision submit
-  const handleDecisionSubmit = (appId) => {
-    if (!decisions[appId]?.decision) {
-      alert("Please select a decision before submitting.");
+  // Handle recommendation submit
+  const handleRecommendationSubmit = (appId) => {
+    if (!recommendations[appId]?.recommendation) {
+      alert("Please select a recommendation before submitting.");
       return;
     }
-    const existing = JSON.parse(localStorage.getItem('committeeDecisions')) || [];
-    const newDecision = {
+    const existing = JSON.parse(localStorage.getItem('committeeRecommendations')) || [];
+    const newRecommendation = {
       applicationId: appId,
-      decision: decisions[appId].decision,
-      reason: decisions[appId].reason || "",
+      recommendation: recommendations[appId].recommendation,
+      reason: recommendations[appId].reason || "",
       decidedAt: new Date().toISOString()
     };
-    localStorage.setItem('committeeDecisions', JSON.stringify([...existing, newDecision]));
-    alert("Decision submitted to HR Board!");
+    localStorage.setItem('committeeRecommendations', JSON.stringify([...existing, newRecommendation]));
+    alert("Recommendation submitted to HR Board!");
   };
 
   // Handle input change
-  const handleDecisionChange = (appId, field, value) => {
-    setDecisions(prev => ({
+  const handleRecommendationChange = (appId, field, value) => {
+    setRecommendations(prev => ({
       ...prev,
       [appId]: { ...prev[appId], [field]: value }
     }));
@@ -101,7 +101,7 @@ const ReviewSummary = () => {
             <p><strong>Reviewer Rank:</strong> {rev.reviewerRank}</p>
             <p><strong>Affiliation:</strong> {rev.affiliation}</p>
             <p className={`recommendation-tag ${rev.recommendation}`}>
-              <strong>Recommendation:</strong> {rev.recommendation.toUpperCase()}
+              <strong>Reviewer Recommendation:</strong> {rev.recommendation.toUpperCase()}
             </p>
             {rev.recommendationReason && (
               <p><strong>Recommendation Reason:</strong> {rev.recommendationReason}</p>
@@ -109,25 +109,25 @@ const ReviewSummary = () => {
             {rev.fileName && <p><strong>Attached Document:</strong> {rev.fileName}</p>}
             <p className="submitted-at"><em>Submitted at: {new Date(rev.submittedAt).toLocaleString()}</em></p>
 
-            {/* Committee Decision Section */}
-            <div className="decision-section">
-              <h4>Committee Decision:</h4>
+            {/* Committee Recommendation Section */}
+            <div className="recommendation-section">
+              <h4>Committee Recommendation:</h4>
               <select
-                value={decisions[rev.applicationId]?.decision || ""}
-                onChange={(e) => handleDecisionChange(rev.applicationId, "decision", e.target.value)}
+                value={recommendations[rev.applicationId]?.recommendation || ""}
+                onChange={(e) => handleRecommendationChange(rev.applicationId, "recommendation", e.target.value)}
               >
-                <option value="">--Select Decision--</option>
-                <option value="approve">Approve for HR Board</option>
-                <option value="reject">Reject Application</option>
-                <option value="revise">Send Back for Revision</option>
+                <option value="">Select Recommendation</option>
+                <option value="recommended">Recommended for Promotion</option>
+                <option value="revisions">Minor Revisions</option>
+                <option value="reject">Not Recommended for Promotion</option>
               </select>
               <textarea
-                placeholder="Reason for decision (optional)"
-                value={decisions[rev.applicationId]?.reason || ""}
-                onChange={(e) => handleDecisionChange(rev.applicationId, "reason", e.target.value)}
+                placeholder="Reason for recommendation (optional)"
+                value={recommendations[rev.applicationId]?.reason || ""}
+                onChange={(e) => handleRecommendationChange(rev.applicationId, "reason", e.target.value)}
               />
-              <button onClick={() => handleDecisionSubmit(rev.applicationId)} className="submit-decision-btn">
-                Submit Decision
+              <button onClick={() => handleRecommendationSubmit(rev.applicationId)} className="submit-decision-btn">
+                Submit Recommendation
               </button>
             </div>
           </div>

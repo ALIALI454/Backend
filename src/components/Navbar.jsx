@@ -24,7 +24,7 @@ const Navbar = () => {
 
   return (
     <nav style={{
-      backgroundColor: '#34495e',
+      backgroundColor: '#0f0e0fff',
       padding: '10px 0'
     }}>
       <div style={{
@@ -59,7 +59,7 @@ const Navbar = () => {
             onClick={handleLogout}
             style={{
               padding: '5px 10px',
-              backgroundColor: '#e74c3c',
+              backgroundColor: '#15d635ff',
               color: 'white',
               border: 'none',
               borderRadius: '3px',
@@ -88,7 +88,7 @@ const Navbar = () => {
                 textDecoration: 'none',
                 padding: '5px 10px',
                 borderRadius: '3px',
-                backgroundColor: '#3498db'
+                backgroundColor: '#1bd62aff'
               }}
             >
               Register

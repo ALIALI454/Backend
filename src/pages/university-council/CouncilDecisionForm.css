@@ -1,0 +1,74 @@
+/* HrDecisionsList.css */
+.hr-decisions-list {
+  max-width: 900px;
+  margin: 30px auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  background: #f9f9f9;
+  border-radius: 8px;
+}
+
+.decision-card {
+  background: white;
+  padding: 16px;
+  margin-bottom: 20px;
+  border-radius: 6px;
+  box-shadow: 0 0 6px rgba(0,0,0,0.1);
+}
+
+.decision-card h3 {
+  margin-top: 0;
+}
+
+.go-to-council-btn {
+  margin-top: 12px;
+  padding: 8px 16px;
+  background-color: #0077cc;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.go-to-council-btn:hover {
+  background-color: #005fa3;
+}
+
+/* CouncilDecisionForm.css */
+.council-decision-form {
+  max-width: 600px;
+  margin: 30px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 8px;
+  font-family: Arial, sans-serif;
+}
+
+.council-decision-form label {
+  display: block;
+  margin-bottom: 12px;
+}
+
+.council-decision-form select,
+.council-decision-form textarea {
+  width: 100%;
+  padding: 8px;
+  margin-top: 4px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+}
+
+.council-decision-form button {
+  margin-top: 16px;
+  padding: 10px 18px;
+  background-color: #0077cc;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.council-decision-form button:hover {
+  background-color: #005fa3;
+}
