@@ -1,0 +1,116 @@
+/* src/pages/applicant/ApplicantDashboard.css */
+
+/* Main container for the dashboard */
+.applicant-dashboard {
+  font-family: 'Inter', sans-serif;
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 40px;
+  background-color: #f9fafb;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  color: #333;
+  text-align: center;
+}
+
+/* Header styling */
+.applicant-dashboard h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #1a202c;
+  margin-bottom: 10px;
+}
+
+.applicant-dashboard p {
+  font-size: 1.1rem;
+  color: #4a5568;
+  margin-bottom: 30px;
+}
+
+/* Container for action links */
+.dashboard-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 30px;
+}
+
+/* Styling for the action links (buttons) */
+.dashboard-link, .logout-button {
+  padding: 15px 25px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  min-width: 220px;
+  text-align: center;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.dashboard-link {
+  background-color: #ffffff;
+  color: #4a5568;
+  border: 1px solid #e2e8f0;
+}
+
+.dashboard-link:hover {
+  background-color: #e2e8f0;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Special styling for the primary action link (e.g., "Start New Application") */
+.primary-link {
+  background-color: #3b82f6;
+  color: #ffffff;
+  border-color: #3b82f6;
+}
+
+.primary-link:hover {
+  background-color: #2563eb;
+  border-color: #2563eb;
+}
+
+/* Logout button styling */
+.logout-button {
+  margin-top: 40px;
+  background-color: #ef4444;
+  color: #ffffff;
+  font-weight: 600;
+  width: 150px;
+}
+
+.logout-button:hover {
+  background-color: #dc2626;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 768px) {
+  .applicant-dashboard {
+    padding: 20px;
+    margin: 20px;
+  }
+
+  .applicant-dashboard h1 {
+    font-size: 2rem;
+  }
+
+  .dashboard-actions {
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+  }
+
+  .dashboard-link {
+    width: 100%;
+  }
+
+  .logout-button {
+    width: 100%;
+  }
+}

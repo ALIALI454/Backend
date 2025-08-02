@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import './SchoolList.css'; // <-- External CSS
+import { useNavigate } from 'react-router-dom';  // <-- Import useNavigate
+import './SchoolList.css';
 
 const SchoolList = () => {
   const [schools, setSchools] = useState([]);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate(); // Initialize navigate
 
   useEffect(() => {
     fetch('http://localhost:8080/api/schools')
@@ -28,12 +30,14 @@ const SchoolList = () => {
           <div className="button-container">
             <button 
               onClick={() => alert(`Add staff for school ID: ${school.sId}`)} 
-              className="btn btn-add">
+              className="btn btn-add"
+            >
               Add Staff
             </button>
             <button 
-              onClick={() => alert(`View applications for school ID: ${school.sId}`)} 
-              className="btn btn-view">
+              onClick={() => navigate(`/admin/schoolapplication?schoolId=${school.sId}`)}  // Navigate with query param
+              className="btn btn-view"
+            >
               View Applications
             </button>
           </div>

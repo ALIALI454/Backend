@@ -9,7 +9,7 @@ const Login = () => {
   const [credentials, setCredentials] = useState({
     email: '',
     password: '',
-    role: 'applicant',
+    role: 'applicant', // This role field is for UI only, backend determines role
   });
   const [error, setError] = useState('');
   const navigate = useNavigate();
@@ -24,59 +24,98 @@ const Login = () => {
   };
 
   const handleSubmit = async (e) => {
-  e.preventDefault();
+    e.preventDefault();
+    setError('');
 
-  if (!credentials.email || !credentials.password) {
-    setError('Please fill in all fields.');
-    return;
-  }
-
-  try {
-    // Call backend login
-    const response = await fetch('http://localhost:8080/api/users/login', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        username: credentials.email, // login with username
-        password: credentials.password
-      }),
-    });
-
-    if (!response.ok) {
-      const errorText = await response.text();
-      setError(errorText || 'Invalid credentials');
+    if (!credentials.email || !credentials.password) {
+      setError('Please fill in all fields.');
       return;
     }
 
-    const data = await response.json();
-    // Save userId and schoolId in localStorage
-    localStorage.setItem('userId', data.userId);
-    localStorage.setItem('schoolId', data.schoolId || '');
+    // Direct admin login (bypass backend)
+   // Direct login bypass for admin and school-team
+if (
+  credentials.email === 'admin@gmail.com' &&
+  credentials.password === 'admin123'
+) {
+  localStorage.setItem('role', 'admin');
+  localStorage.setItem('userId', '0');
+  login({ userId: 0, role: 'admin' });
+  navigate('/admin');
+  return;
+}
 
-    // Decide redirect path based on role returned from backend
-    const redirectPaths = {
-      applicant: '/applicant/criteria',
-      'university-community': '/university-community/dashboard',
-      'school-team': '/school-team/category-criteria',
-      'university-committee': '/university-committee/applications',
-      reviewer: '/reviewer/applications',
-      'hr-board': '/hr-board/dashboard',
-      'university-council': '/university-council/dashboard',
-      admin: '/admin',
-    };
+if (
+  credentials.email === 'schoolteam@gmail.com' &&
+  credentials.password === '123456'
+) {
+  localStorage.setItem('role', 'school-team');
+  localStorage.setItem('userId', '0');
+  login({ userId: 0, role: 'school-team' });
+  navigate('/school-team/category-criteria');
+  return;
+}
 
-    const redirectPath = redirectPaths[data.role.toLowerCase()] || '/unauthorized';
 
-    // optional: useAuth context to set user
-    login({ email: credentials.email, role: data.role });
+    try {
+      const response = await fetch('http://localhost:8080/api/users/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email: credentials.email,
+          password: credentials.password,
+        }),
+      });
 
-    navigate(redirectPath);
-  } catch (err) {
-    console.error(err);
-    setError('An error occurred. Please try again later.');
-  }
-};
+      if (!response.ok) {
+        const errorText = await response.text();
+        setError(errorText || 'Invalid credentials');
+        return;
+      }
 
+      const data = await response.json();
+
+      localStorage.setItem('userId', data.userId);
+      localStorage.setItem('schoolId', data.sId || '');
+      localStorage.setItem('role', data.role);
+
+      if (data.role === 'APPLICANT') {
+        try {
+          const appResponse = await fetch(
+            `http://localhost:8080/api/applicants/by-user/${data.userId}`
+          );
+          if (appResponse.ok) {
+            const applicant = await appResponse.json();
+            if (applicant.app_Id) {
+              localStorage.setItem('appId', applicant.app_Id);
+            }
+          }
+        } catch (fetchErr) {
+          console.error('Error fetching applicant ID:', fetchErr);
+        }
+      }
+
+      const redirectPaths = {
+        'applicant': '/applicant/criteria',
+        'university-community': '/university-community/dashboard',
+        'school-team': '/school-team/category-criteria',
+        'university-committee': '/university-committee/applications',
+        'reviewer': '/reviewer/applications',
+        'hr-board': '/hr-board/dashboard',
+        'university-council': '/university-council/dashboard',
+        'admin': '/admin',
+      };
+
+      const redirectPath =
+        redirectPaths[data.role.toLowerCase()] || '/unauthorized';
+
+      login({ userId: data.userId, role: data.role });
+      navigate(redirectPath);
+    } catch (err) {
+      console.error('Login error:', err);
+      setError('An error occurred. Please try again later.');
+    }
+  };
 
   return (
     <div className="login-wrapper">
@@ -96,7 +135,6 @@ const Login = () => {
         {error && <div className="error-message show-error">{error}</div>}
 
         <form onSubmit={handleSubmit} className="login-form">
-
           {/* Role */}
           <div className="form-group">
             <label htmlFor="role" className="form-label">
@@ -112,13 +150,17 @@ const Login = () => {
               className="login-select"
             >
               <option value="applicant">Applicant</option>
-              <option value="school-team">School/Institution Promotion Team</option>
+              <option value="school-team">
+                School/Institution Promotion Team
+              </option>
               <option value="university-committee">University Committee</option>
               <option value="reviewer">Reviewer</option>
               <option value="hr-board">HR Board</option>
               <option value="university-council">University Council</option>
-              <option value="university-community">University Community</option>
-              <option value="admin">Admin</option> {/* <-- ADDED Admin */}
+              <option value="university-community">
+                University Community
+              </option>
+              <option value="admin">Admin</option>
             </select>
           </div>
 
@@ -167,10 +209,14 @@ const Login = () => {
         <div className="login-footer">
           <p className="footer-text">
             Don't have an account?{' '}
-            <Link to="/register" className="footer-link">Register</Link>
+            <Link to="/register" className="footer-link">
+              Register
+            </Link>
           </p>
           <p className="footer-text">
-            <Link to="/forgot-password" className="footer-link">Forgot Password?</Link>
+            <Link to="/forgot-password" className="footer-link">
+              Forgot Password?
+            </Link>
           </p>
         </div>
       </div>

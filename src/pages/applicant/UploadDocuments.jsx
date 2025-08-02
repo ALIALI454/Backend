@@ -1,8 +1,11 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./UploadDocuments.css";
+import axios from "axios";
 
 const UploadDocuments = () => {
+  const [applications, setApplications] = useState([]);
+  const [selectedApplicationId, setSelectedApplicationId] = useState("");
   const [files, setFiles] = useState([
     { id: "cv", label: "Curriculum Vitae (CV)", fileObject: null, status: "pending", progress: 0, errorMessage: null, required: true },
     { id: "certificates", label: "Academic Certificates", fileObject: null, status: "pending", progress: 0, errorMessage: null, required: true },
@@ -12,74 +15,112 @@ const UploadDocuments = () => {
   const fileInputRefs = useRef({});
   const navigate = useNavigate();
 
-  // Function to upload file to backend
- const uploadToBackend = async (docId, file) => {
-  setFiles((prev) =>
-    prev.map((d) =>
-      d.id === docId ? { ...d, status: "uploading", progress: 0, fileObject: file, errorMessage: null } : d
-    )
-  );
-
-  const formData = new FormData();
-
-  let documentType = "";
-  if (docId === "cv") documentType = "Curriculum Vitae (CV)";
-  else if (docId === "certificates") documentType = "Academic Certificates";
-  else if (docId === "evidence") documentType = "Evidence Documents";
-  else documentType = "Additional Documents";
-
-  formData.append("documentType", documentType);
-  formData.append("file", file);
-
-  const applicationId = localStorage.getItem("applicationId");
-  if (!applicationId) {
-    alert("Application ID not found. Please fill the application form first.");
-    return;
-  }
-  try {
-    for (let p = 0; p <= 90; p += 10) {
-      await new Promise((res) => setTimeout(res, 100));
-      setFiles((prev) => prev.map((d) => (d.id === docId ? { ...d, progress: p } : d)));
+  // Fetch applications and filter by logged-in userId
+  useEffect(() => {
+    const storedUserId = localStorage.getItem("userId");
+    if (!storedUserId) {
+      console.error("No userId in localStorage");
+      return;
     }
 
-    const response = await fetch(`http://localhost:8080/api/documents/${applicationId}/documents`, {
-      method: "POST",
-      body: formData,
-    });
+    const userId = parseInt(storedUserId, 10);
 
-    if (!response.ok) throw new Error(`Upload failed with status ${response.status}`);
+    axios
+      .get("http://localhost:8080/api/applications")
+      .then((res) => {
+        // Filter by nested applicant.user.userId
+        const filtered = res.data.filter(
+          (app) => app.applicant?.user?.userId === userId
+        );
+        setApplications(filtered);
+      })
+      .catch((err) => {
+        console.error("Error fetching applications:", err);
+      });
+  }, []);
 
-    await response.json();
+  // Upload document to backend
+  const uploadToBackend = async (docId, file) => {
+    if (!selectedApplicationId) {
+      alert("Please select an application before uploading.");
+      return;
+    }
 
     setFiles((prev) =>
-      prev.map((d) => (d.id === docId ? { ...d, status: "completed", progress: 100, errorMessage: null } : d))
+      prev.map((d) =>
+        d.id === docId ? { ...d, status: "uploading", progress: 0, fileObject: file, errorMessage: null } : d
+      )
     );
-  } catch (error) {
-    setFiles((prev) =>
-      prev.map((d) => (d.id === docId ? { ...d, status: "failed", errorMessage: error.message } : d))
-    );
-  }
-};
+
+    const formData = new FormData();
+
+    let documentType = "";
+    if (docId === "cv") documentType = "Curriculum Vitae (CV)";
+    else if (docId === "certificates") documentType = "Academic Certificates";
+    else if (docId === "evidence") documentType = "Evidence Documents";
+    else documentType = "Additional Documents";
+
+    formData.append("documentType", documentType);
+    formData.append("file", file);
+
+    try {
+      // Simulate progress
+      for (let p = 0; p <= 90; p += 10) {
+        await new Promise((res) => setTimeout(res, 100));
+        setFiles((prev) =>
+          prev.map((d) => (d.id === docId ? { ...d, progress: p } : d))
+        );
+      }
+
+      const response = await fetch(
+        `http://localhost:8080/api/documents/${selectedApplicationId}/documents`,
+        {
+          method: "POST",
+          body: formData,
+        }
+      );
+
+      if (!response.ok) throw new Error(`Upload failed with status ${response.status}`);
+
+      await response.json();
+
+      setFiles((prev) =>
+        prev.map((d) =>
+          d.id === docId
+            ? { ...d, status: "completed", progress: 100, errorMessage: null }
+            : d
+        )
+      );
+    } catch (error) {
+      setFiles((prev) =>
+        prev.map((d) =>
+          d.id === docId ? { ...d, status: "failed", errorMessage: error.message } : d
+        )
+      );
+    }
+  };
 
   const handleFileChange = (e, docId) => {
     const selectedFile = e.target.files[0];
     if (!selectedFile) return;
 
-    // Validate PDF only
     if (selectedFile.type !== "application/pdf") {
       setFiles((prev) =>
         prev.map((d) =>
-          d.id === docId ? { ...d, status: "failed", errorMessage: "Only PDF files are allowed." } : d
+          d.id === docId
+            ? { ...d, status: "failed", errorMessage: "Only PDF files are allowed." }
+            : d
         )
       );
       return;
     }
 
-    // Validate max size 90MB
     if (selectedFile.size > 90 * 1024 * 1024) {
       setFiles((prev) =>
         prev.map((d) =>
-          d.id === docId ? { ...d, status: "failed", errorMessage: "File size exceeds 90MB." } : d
+          d.id === docId
+            ? { ...d, status: "failed", errorMessage: "File size exceeds 90MB." }
+            : d
         )
       );
       return;
@@ -149,6 +190,21 @@ const UploadDocuments = () => {
           </button>
         </div>
 
+        <div>
+          <h2>Select Application</h2>
+          <select
+            value={selectedApplicationId}
+            onChange={(e) => setSelectedApplicationId(e.target.value)}
+          >
+            <option value="">-- Select an application --</option>
+            {applications.map((app) => (
+              <option key={app.id} value={app.id}>
+                {app.positionApplied}
+              </option>
+            ))}
+          </select>
+        </div>
+
         <div className="file-list">
           {files.map((doc) => (
             <div key={doc.id} className="file-item">
@@ -169,7 +225,7 @@ const UploadDocuments = () => {
                   <span className="status-failed">Failed: {doc.errorMessage}</span>
                 )}
               </div>
-              {(doc.status === "pending" || doc.status === "failed") ? (
+              {doc.status === "pending" || doc.status === "failed" ? (
                 <>
                   <input
                     type="file"

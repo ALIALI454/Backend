@@ -37,6 +37,8 @@ const Sidebar = () => {
           { path: "/admin", name: "Dashboard", icon: <FaHome /> },
           { path: "/admin/manage-criteria", name: "Manage Criteria", icon: <FaCogs /> },
           { path: "/admin/roles-access", name: "Roles & Access", icon: <FaKey /> },
+          { path: "/admin/applications-list", name: "Applications list", icon: <FaKey /> },
+          
           { path: "/admin/user-management", name: "User Management", icon: <FaUsers /> },
           { path: "/admin/account-control", name: "Account Control", icon: <FaUserCog /> },
            { path: "/admin/add-school", name: "Add School", icon: <FaSchool /> },
