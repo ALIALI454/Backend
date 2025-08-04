@@ -266,6 +266,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from 'react-router-dom';
+import './ApplicationForm.css'; // CSS ya form
 
 const ApplicationForm = () => {
   const appId = localStorage.getItem("appId");

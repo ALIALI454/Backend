@@ -312,6 +312,8 @@ import ResetPassword from './pages/Admin/ResetPassword';
 import AddSchoolForm from './pages/Admin/AddSchoolForm';
 import SchoolList from './pages/Admin/SchoolList';
 import SchoolApplications from './pages/Admin/SchoolApplications ';
+import CreateAdminUserForm from './pages/Admin/CreateAdminUserForm';
+
 
 function App() {
   return (
@@ -425,6 +427,7 @@ function App() {
             <Route path="reset-password" element={<ResetPassword />} />
             <Route path="add-school" element={<AddSchoolForm />} />
             <Route path="schoolapplication" element={<SchoolApplications />} />
+            <Route path="create-user" element={<CreateAdminUserForm />} />
             
             
 

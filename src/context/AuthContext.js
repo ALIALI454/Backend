@@ -35,36 +35,48 @@
 
 
 // src/context/AuthContext.js
-import React, { createContext, useContext, useState, useEffect } from "react";
+import React, { createContext, useContext, useState, useEffect } from 'react';
 
 const AuthContext = createContext();
+export const useAuth = () => useContext(AuthContext);
 
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(() => {
+    try {
+      const storedUser = JSON.parse(localStorage.getItem('suza_user'));
+      return storedUser ? storedUser : null;
+    } catch {
+      return null;
+    }
+  });
 
-  // Login function: normalize role to lowercase safely
+  useEffect(() => {
+    if (user) {
+      localStorage.setItem('suza_user', JSON.stringify(user));
+    } else {
+      localStorage.removeItem('suza_user');
+    }
+  }, [user]);
+
   const login = (userData) => {
-    const role = userData?.role ? String(userData.role).toLowerCase() : null;
-    setUser({ ...userData, role });
-    localStorage.setItem("user", JSON.stringify({ ...userData, role }));
+    // Hakikisha role inahifadhiwa kama lowercase
+    setUser({
+      ...userData,
+      role: userData.role.toLowerCase()
+    });
   };
 
   const logout = () => {
     setUser(null);
-    localStorage.removeItem("user");
   };
 
-  // Load user from localStorage on refresh
-  useEffect(() => {
-    const savedUser = localStorage.getItem("user");
-    if (savedUser) setUser(JSON.parse(savedUser));
-  }, []);
+  const register = (formData) => {
+    console.log('Registering user:', formData);
+  };
 
   return (
-    <AuthContext.Provider value={{ user, login, logout }}>
+    <AuthContext.Provider value={{ user, login, register, logout }}>
       {children}
     </AuthContext.Provider>
   );
 };
-
-export const useAuth = () => useContext(AuthContext);
