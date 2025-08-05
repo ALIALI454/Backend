@@ -1,0 +1,161 @@
+/* UpdateApplicationForm.css */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+body {
+  background-color: #f0f2f5;
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.update-form-container {
+  max-width: 900px;
+  margin: 50px auto;
+  padding: 40px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+
+.update-form-container h2 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #2c3e50;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.update-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 25px;
+}
+
+/* Kila kitu cha fomu */
+.update-form label {
+  display: flex;
+  flex-direction: column;
+  font-weight: 500;
+  color: #34495e;
+  font-size: 0.95rem;
+}
+
+.update-form input[type="text"],
+.update-form input[type="date"],
+.update-form input[type="number"],
+.update-form textarea {
+  width: 100%;
+  padding: 12px 15px;
+  margin-top: 8px;
+  border: 1px solid #dcdfe4;
+  border-radius: 8px;
+  box-sizing: border-box;
+  font-size: 1rem;
+  color: #333;
+  background-color: #fafbfd;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.update-form input[type="text"]:focus,
+.update-form input[type="date"]:focus,
+.update-form input[type="number"]:focus,
+.update-form textarea:focus {
+  border-color: #3498db;
+  box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+  outline: none;
+}
+
+.update-form textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+/* Vitufe vya checkbox */
+.update-form label.checkbox-label {
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+}
+
+.update-form input[type="checkbox"] {
+  width: auto;
+}
+
+/* Maelezo ya fomu */
+.form-actions {
+  grid-column: 1 / -1; /* Inachukua safu zote */
+  display: flex;
+  justify-content: flex-end;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.btn-submit,
+.btn-cancel {
+  padding: 14px 28px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.btn-submit {
+  background-color: #2ecc71; /* Kijani safi */
+  color: #ffffff;
+}
+
+.btn-submit:hover {
+  background-color: #27ae60;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(46, 204, 113, 0.3);
+}
+
+.btn-cancel {
+  background-color: #e74c3c; /* Rangi nyekundu kwa kufuta */
+  color: #ffffff;
+}
+
+.btn-cancel:hover {
+  background-color: #c0392b;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(231, 76, 60, 0.3);
+}
+
+/* Ujumbe wa makosa na mafanikio */
+.error, .success {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  font-weight: 500;
+}
+
+.error {
+  background-color: #fdeded;
+  color: #e74c3c;
+}
+
+.success {
+  background-color: #e8f9ed;
+  color: #27ae60;
+}
+
+/* Marekebisho ya muundo wa checkbox */
+input[type="checkbox"] {
+  transform: scale(1.2);
+  accent-color: #3498db;
+}
+
+/* Kugeuza muundo kwa skrini ndogo */
+@media (max-width: 768px) {
+  .update-form {
+    grid-template-columns: 1fr;
+  }
+  .form-actions {
+    flex-direction: column;
+  }
+}

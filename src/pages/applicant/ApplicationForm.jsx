@@ -282,6 +282,7 @@ const ApplicationForm = () => {
     appliedBefore: false,
     previousApplicationDate: "",
     newPublications: false,
+    feedback: 'null',
   });
 
    const navigate = useNavigate();

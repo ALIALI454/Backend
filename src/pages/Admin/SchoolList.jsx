@@ -35,7 +35,7 @@ const SchoolList = () => {
               Add Staff
             </button>
             <button 
-              onClick={() => navigate(`/admin/schoolapplication?schoolId=${school.sId}`)}  // Navigate with query param
+              onClick={() => navigate(`/admin/schoolapplications?schoolId=${school.sId}`)}  // Navigate with query param
               className="btn btn-view"
             >
               View Applications
