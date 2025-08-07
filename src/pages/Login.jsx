@@ -435,6 +435,7 @@ const Login = () => {
     if (credentials.email === 'admin@gmail.com' && credentials.password === 'admin123') {
       localStorage.setItem('role', 'ADMIN');
       localStorage.setItem('userId', '0');
+      
       login({ userId: 0, role: 'ADMIN' });
       navigate('/admin');
       return;
@@ -464,6 +465,10 @@ const Login = () => {
       localStorage.setItem('userId', data.userId);
       localStorage.setItem('schoolId', data.schoolId || '');
       localStorage.setItem('role', data.role);
+      // Hifadhi schoolId kwa non-admin tu
+if (data.role.toUpperCase().trim() !== 'ADMIN') {
+  localStorage.setItem('schoolId', data.sId || '');
+}
 
       if (data.role === 'APPLICANT') {
         try {

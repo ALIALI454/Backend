@@ -321,19 +321,21 @@ const Sidebar = () => {
           { path: "/admin/school-list", name: "School List", icon: <FaSchool /> },
           { path: "/admin/reset-password", name: "Reset Password", icon: <FaLock /> },
           { path: "/admin/schoolapplications", name: "School Applications", icon: <FaFileAlt /> },
+          { path: "/admin/users", name: "School Team Users", icon: <FaUsers /> },
 
           // NEW: View Users by Role
-          { path: "/hr-board/users", name: "HR Board Users", icon: <FaUsers /> },
-          { path: "/reviewer/users", name: "Reviewer Users", icon: <FaUsers /> },
-          { path: "/committee/users", name: "Committee Users", icon: <FaUsers /> },
-          { path: "/university-council/users", name: "Council Users", icon: <FaUsers /> },
-          { path: "/school-team/users", name: "School Team Users", icon: <FaUsers /> },
+          { path: "/admin/hrusers", name: "HR Board Users", icon: <FaUsers /> },
+          { path: "/admin/reviewerusers", name: "Reviewer Users", icon: <FaUsers /> },
+          { path: "/admin/comiteeusers", name: "Committee Users", icon: <FaUsers /> },
+          { path: "/admin/uCouncilusers", name: "Council Users", icon: <FaUsers /> },
+          { path: "/admin/schoolteamusers", name: "School Team Users", icon: <FaUsers /> },
         ];
-
+                 
       case "APPLICANT":
         return [
           { path: "/applicant", name: "Dashboard", icon: <FaHome /> },
           { path: "/applicant/profile", name: "User Profile", icon: <FaUser /> },
+          { path: "/applicant/user-applications", name: "Applications List", icon: <FaClipboardList /> },
           { path: "/applicant/criteria", name: "Category Criteria", icon: <FaClipboardList /> },
           { path: "/applicant/application", name: "Application Form", icon: <FaFileAlt /> },
           { path: "/applicant/upload", name: "Upload Documents", icon: <FaUpload /> },
@@ -349,11 +351,12 @@ const Sidebar = () => {
           { path: "/school-team/applications", name: "Application Details", icon: <FaFileAlt /> },
           { path: "/school-team/checklist", name: "Checklist", icon: <FaCheckSquare /> },
           { path: "/school-team/forward", name: "Forward Application", icon: <FaShareSquare /> },
-          { path: "/school-team/feedback", name: "Feedback Form", icon: <FaComments /> },
+          // { path: "/school-team/feedback", name: "Feedback Form", icon: <FaComments /> },
           { path: "/school-team/applications/update/1", name: "Update Application", icon: <FaUserCog /> },
+          { path: "/school-team/feedback", name: "Feedback", icon: <FaComments /> },
 
           // NEW: Users Table for School Team
-          { path: "/school-team/users", name: "School Team Users", icon: <FaUsers /> },
+          
         ];
 
       case "UNIVERSITY_COMMITTEE":

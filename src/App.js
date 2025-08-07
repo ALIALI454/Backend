@@ -833,10 +833,11 @@ import SchoolTeamDashboard from './pages/school-team/SchoolTeamDashboard';
 import CategoryCriteriaViewer from './pages/school-team/CategoryCriteriaViewer';
 import SchoolTeamApplicationDetails from './pages/school-team/ApplicationDetails';
 import SchoolTeamCategoryCriteria from './pages/school-team/CategoryCriteria';
-import FeedbackForm from './pages/school-team/FeedbackForm';
+// import FeedbackForm from './pages/school-team/FeedbackForm';
 import UpdateApplicationForm from './pages/school-team/UpdateApplicationForm';
 import ForwardButton from './pages/school-team/ForwardButton';
 import SchoolTeamUsers from './pages/SchoolTeamUsers';
+import FeedbackTable from "./pages/school-team/FeedbackTable";
 
 // Committee
 import UniversityCommitteeDashboard from './pages/university-committee/UniversityCommitteeDashboard';
@@ -877,7 +878,7 @@ import PromotionDetails from './pages/university-community/PromotionDetails';
 import SearchFilter from './pages/university-community/SearchFilter';
 
 // Admin
-import AdminDashboard from './pages/Admin/AdminDashboard';
+// import AdminDashboard from './pages/Admin/AdminDashboard';
 import ManageCriteria from './pages/Admin/ManageCriteria';
 import RoleAccessControl from './pages/Admin/RoleAccessControl';
 import UserManagement from './pages/Admin/UserManagement';
@@ -907,6 +908,8 @@ function App() {
             <Route path="feedback" element={<Feedback />} />
             <Route path="criteria" element={<CategoryCriteria />} />
             <Route path="profile" element={<UserProfile />} />
+            <Route path="user-applications" element={<SchoolTeamApplicationDetails />} />
+            
           </Route>
 
           <Route path="/school-team" element={<PrivateRoute allowedRoles={["SCHOOL_TEAM"]} />}>
@@ -914,10 +917,10 @@ function App() {
             <Route path="applications" element={<SchoolTeamApplicationDetails />} />
             <Route path="applications/update/:id" element={<UpdateApplicationForm />} />
             <Route path="criteria" element={<SchoolTeamCategoryCriteria />} />
-            <Route path="feedback" element={<FeedbackForm />} />
+            {/* <Route path="feedback" element={<FeedbackForm />} /> */}
             <Route path="category-criteria" element={<CategoryCriteriaViewer />} />
             <Route path="forward/:id" element={<ForwardButton />} />
-            <Route path="users" element={<SchoolTeamUsers />} />
+            <Route path="/school-team/feedback" element={<FeedbackTable />} />
           </Route>
 
           <Route path="/university-committee" element={<PrivateRoute allowedRoles={["UNIVERSITY_COMMITTEE"]} />}>
@@ -927,7 +930,7 @@ function App() {
             <Route path="feedback/:id" element={<CommitteeFeedback />} />
             <Route path="review-summary" element={<ReviewSummary />} />
             <Route path="assign" element={<AssignReviewer />} />
-            <Route path="users" element={<CommitteeUsers />} />
+            
           </Route>
 
           <Route path="/reviewer" element={<PrivateRoute allowedRoles={["REVIEWER"]} />}>
@@ -936,7 +939,7 @@ function App() {
             <Route path="document-viewer" element={<DocumentViewer />} />
             <Route path="feedback" element={<ReviewerFeedbackForm />} />
             <Route path="review" element={<SubmitReview />} />
-            <Route path="users" element={<ReviewerUsers />} />
+            
           </Route>
 
           <Route path="/hr-board" element={<PrivateRoute allowedRoles={["HR_BOARD"]} />}>
@@ -944,7 +947,7 @@ function App() {
             <Route path="committee-decisions" element={<CommitteeDecisionsList />} />
             <Route path="make-decisions/:id" element={<HrDecisionForm />} />
             <Route path="council-decisions" element={<CouncilDecisionsList />} />
-            <Route path="users" element={<HRBoardUsers />} />
+            
           </Route>
 
           <Route path="/university-council" element={<PrivateRoute allowedRoles={["UNIVERSITY_COUNCIL"]} />}>
@@ -952,7 +955,7 @@ function App() {
             <Route path="hr-decisions" element={<HrDecisionsList />} />
             <Route path="decision-form/:id" element={<CouncilDecisionForm />} />
             <Route path="final-approved" element={<FinalApprovedList />} />
-            <Route path="users" element={<UniversityCouncilUsers />} />
+            
           </Route>
 
           <Route path="/university-community" element={<PrivateRoute allowedRoles={["UNIVERSITY_COMMUNITY"]} />}>
@@ -964,7 +967,8 @@ function App() {
           </Route>
 
           <Route path="/admin" element={<PrivateRoute allowedRoles={["ADMIN"]} />}>
-            <Route index element={<AdminDashboard />} />
+            {/* <Route index element={<AdminDashboard />} /> */}
+            <Route index element={<ManageCriteria />} />
             <Route path="manage-criteria" element={<ManageCriteria />} />
             <Route path="school-list" element={<SchoolList />} />
             <Route path="roles-access" element={<RoleAccessControl />} />
@@ -975,8 +979,13 @@ function App() {
             <Route path="schoolapplications" element={<SchoolApplications />} />
             <Route path="applications-list" element={<SchoolTeamApplicationDetails />} />
             <Route path="create-user" element={<CreateAdminUserForm />} />
+            <Route path="hrusers" element={<HRBoardUsers />} />
+            <Route path="comiteeusers" element={<CommitteeUsers />} />
+            <Route path="schoolteamusers" element={<SchoolTeamUsers />} />
+            <Route path="uCouncilusers" element={<UniversityCouncilUsers />} />
+            <Route path="reviewerusers" element={<ReviewerUsers />} />
           </Route>
-
+                
           <Route path="*" element={<Navigate to="/login" replace />} />
         </Routes>
       </Router>

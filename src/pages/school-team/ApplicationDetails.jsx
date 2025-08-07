@@ -142,7 +142,6 @@
 // };
 
 // export default ApplicationDetails;
-
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './ApplicationDetails.css';
@@ -172,12 +171,10 @@ const ApplicationCard = ({ application }) => {
   const getDocumentUrl = (docId) => `http://localhost:8080/api/documents/file/${docId}`;
 
   const handleConfirm = () => {
-    // Navigate to checklist with applicationId
     navigate(`/school-team/checklist/${application.id}`);
   };
 
   const handleEdit = () => {
-    // Corrected navigation path to match the router configuration
     navigate(`/school-team/applications/update/${application.id}`);
   };
 
@@ -186,9 +183,7 @@ const ApplicationCard = ({ application }) => {
       <div className="status-header">
         <span>{application.status || "Pending"}</span>
       </div>
-
       <div className="card-body">
-        {/* Applicant Info */}
         <div className="applicant-info">
           <div className="avatar">
             {application.fullName ? application.fullName.split(' ').map(n => n[0]).join('') : "NA"}
@@ -199,7 +194,6 @@ const ApplicationCard = ({ application }) => {
           </div>
         </div>
 
-        {/* Details Grid */}
         <div className="details-grid">
           <div className="detail-box"><p className="label">Nationality</p><p className="value">{application.nationality}</p></div>
           <div className="detail-box"><p className="label">Date of Birth</p><p className="value">{application.dateOfBirth}</p></div>
@@ -212,7 +206,6 @@ const ApplicationCard = ({ application }) => {
           <div className="detail-box"><p className="label">Submitted On</p><p className="value">{application.submissionDate}</p></div>
         </div>
 
-        {/* Documents Section */}
         <div className="documents-section">
           <h4 className="section-title">Documents Submitted</h4>
           {docsLoading && <p>Loading documents...</p>}
@@ -238,12 +231,8 @@ const ApplicationCard = ({ application }) => {
 
         <div className="action-buttons">
           <button onClick={() => navigate(-1)} className="btn-secondary">Back</button>
-          <button onClick={handleEdit} className="btn-edit">
-            Edit Application
-          </button>
-          <button onClick={handleConfirm} className="btn-primary">
-            Confirm & Continue →
-          </button>
+          <button onClick={handleEdit} className="btn-edit">Edit Application</button>
+          <button onClick={handleConfirm} className="btn-primary">Confirm & Continue →</button>
         </div>
       </div>
     </div>
@@ -256,13 +245,20 @@ const ApplicationDetails = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
+    const role = localStorage.getItem('role')?.toUpperCase().trim();
+    const appId = localStorage.getItem('appId');
+
     fetch('http://localhost:8080/api/applications')
       .then(res => {
         if (!res.ok) throw new Error('Failed to fetch applications');
         return res.json();
       })
       .then(data => {
-        setApplications(data);
+        let filteredApps = data;
+        if (role === 'APPLICANT' && appId) {
+          filteredApps = data.filter(app => String(app.id) === String(appId)); // only applicant's own application
+        }
+        setApplications(filteredApps);
         setLoading(false);
       })
       .catch(err => {
@@ -294,4 +290,3 @@ const ApplicationDetails = () => {
 };
 
 export default ApplicationDetails;
-
